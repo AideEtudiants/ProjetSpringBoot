@@ -1,8 +1,5 @@
 package projet.example.demo;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,12 +9,18 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloController {
 
     @RequestMapping("hello")
-    public List<Hello> getMessage(){
-        List<Hello> messageList = new ArrayList<>();
-        messageList.add(new Hello("Bonjour"));
-        messageList.add(new Hello("Aniesse"));
-        return messageList;
+    // public List<Hello> getMessage(){
+    //     List<Hello> messageList = new ArrayList<>();
+    //     messageList.add(new Hello("Bonjour"));
+    //     messageList.add(new Hello("Aniesse"));
+    //     return messageList;
+
+    // }
+       public String getMessage(){
+        Hello m1= new Hello("hello");
+        return m1.getMessage();
 
     }
+    
     
 }

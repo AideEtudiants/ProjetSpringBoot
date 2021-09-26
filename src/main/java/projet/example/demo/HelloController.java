@@ -17,8 +17,9 @@ public class HelloController {
 
     // }
        public String getMessage(){
-        Hello m1= new Hello("hello");
-        return m1.getMessage();
+        // Hello m1= new Hello("hello");
+        // m1.getMessage()
+        return "Hello word";
 
     }
     

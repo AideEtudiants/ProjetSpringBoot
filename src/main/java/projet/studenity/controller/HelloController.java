@@ -1,4 +1,4 @@
-package projet.example.demo;
+package projet.studenity.controller;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;

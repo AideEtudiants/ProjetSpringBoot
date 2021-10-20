@@ -1,4 +1,4 @@
-package projet.example.demo;
+package projet.studenity.model;
 
 public class Hello {
     private String message;

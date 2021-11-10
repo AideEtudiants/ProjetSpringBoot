@@ -8,17 +8,25 @@ import org.springframework.web.bind.annotation.RestController;
 
 import projet.studenity.dao.UserDao;
 import projet.studenity.model.User;
+import projet.studenity.service.ProductService;
+import projet.studenity.service.UserService;
+
+
+import java.util.List;
 
 @RestController
 @RequestMapping(value="/user/find")
 public class UserController {
 	@Autowired
-	private UserDao userDao = new UserDao();
+	private UserDao userDao;
+
+	@Autowired
+	private UserService userService;
+
 	
 	@GetMapping(value="/test/{id}")
-	public String findNameUserById(@PathVariable("id") int id) {
-		User user = userDao.getUserById(id);
-		return user.toString();
+	public String findNameUserById(@PathVariable("id") long id) {
+		return userService.findUserById(id).toString();
 	}
 	
 	@GetMapping(value="/count")
@@ -27,9 +35,9 @@ public class UserController {
 		return count;
 	}
 	
-//	@GetMapping(value="/name/{name}")
-//	public String findByFirstName(@PathVariable("name") String firstName) {
-//		 User user = userDao.findByName(firstName);
-//		return user.toString();
-//	}
+	@GetMapping(value="/firstname/{name}")
+	public String findByFirstName(@PathVariable("name") String firstName) {
+		List<User> listUser = userService.findUserByFirstName(firstName);
+		return listUser.toString();
+	}
 }

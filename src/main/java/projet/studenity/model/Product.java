@@ -20,11 +20,11 @@ public class Product {
 	private String image;
     private String description;
     @Column(name="id_status")
-    private String statusCode;
+    private Long statusCode;
     @Column(name="id_category")
-    private Date categoryCode;
+    private Long categoryCode;
     @Column(name="id_user")
-    private String userCode;
+    private Long userCode;
 	public Long getId() {
 		return id;
 	}
@@ -49,22 +49,22 @@ public class Product {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public String getStatusCode() {
+	public Long getStatusCode() {
 		return statusCode;
 	}
-	public void setStatusCode(String statusCode) {
+	public void setStatusCode(Long statusCode) {
 		this.statusCode = statusCode;
 	}
-	public Date getCategoryCode() {
+	public Long getCategoryCode() {
 		return categoryCode;
 	}
-	public void setCategoryCode(Date categoryCode) {
+	public void setCategoryCode(Long categoryCode) {
 		this.categoryCode = categoryCode;
 	}
-	public String getUserCode() {
+	public Long getUserCode() {
 		return userCode;
 	}
-	public void setUserCode(String userCode) {
+	public void setUserCode(Long userCode) {
 		this.userCode = userCode;
 	}
 	@Override
@@ -72,6 +72,4 @@ public class Product {
 		return "Product [id=" + id + ", name=" + name + ", image=" + image + ", description=" + description
 				+ ", statusCode=" + statusCode + ", categoryCode=" + categoryCode + ", userCode=" + userCode + "]";
 	}
-    
-    
 }

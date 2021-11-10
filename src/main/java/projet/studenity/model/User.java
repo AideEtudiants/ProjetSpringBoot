@@ -11,23 +11,28 @@ public class User {
     @Id
     @Column(name="id_user")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_user;
+    private Long id;
+    @Column(name="last_name")
     private String lastName;
+    @Column(name="first_name")
 	private String firstName;
     private String email;
     private String 	password;
+    @Column(name="birth_date")
     private Date birthDate;
+    @Column(name="study_level")
     private String studyLevel;
     private String establishment;
+    @Column(name="certificate_regist")
     private String certificateRegist;
     private String photo;
 
-	public Long getId_user() {
-		return id_user;
+	public Long getId() {
+		return id;
 	}
 
-	public void setId_user(Long id_user) {
-		this.id_user = id_user;
+	public void setId(Long id_user) {
+		this.id = id_user;
 	}
 
 	public String getLastName() {
@@ -104,7 +109,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id_user=" + id_user + ", lastName=" + lastName + ", firstName=" + firstName + ", email=" + email
+		return "User [id_user=" + id + ", lastName=" + lastName + ", firstName=" + firstName + ", email=" + email
 				+ ", password=" + password + ", birthDate=" + birthDate + ", studyLevel=" + studyLevel
 				+ ", establishment=" + establishment + ", certificateRegist=" + certificateRegist + ", photo=" + photo
 				+ "]";

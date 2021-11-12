@@ -35,4 +35,33 @@ public class ProductController {
 		List<Product> listProduct = productService.findProductByName(name);
 		return listProduct.toString();
 	}
+
+	@GetMapping(value="/delete/{id}") //Attendre Product de FE
+	public String deleteProductById(@PathVariable("id") long id){productService.deleteProduct(id); return "Success";}
+
+	@GetMapping(value="/create/{name}")
+	public String createProduct(@PathVariable("name") String name){
+		Product product = new Product();
+		product.setName(name);
+		product.setUserCode(3L);
+		product.setStatusCode(1L);
+		product.setCategoryCode(1L);
+		productDao.createProduct(product);
+		return "Success";
+	}
+
+	@GetMapping(value="/update/{id}/{name}/{image}/{description}/{statusCode}/{categoryCode}/{userId}") //Attendre Product de FE
+	public String updateProduct(@PathVariable("id") long id,@PathVariable("name") String name,@PathVariable("image") String image
+			,@PathVariable("description") String description,@PathVariable("statusCode") long statusCode
+			,@PathVariable("categoryCode") long categoryCode,@PathVariable("userId") long userCode  ){
+		Product product = new Product();
+		product.setName(name);
+		product.setImage(image);
+		product.setDescription(description);
+		product.setStatusCode(statusCode);
+		product.setCategoryCode(categoryCode);
+		product.setUserCode(userCode);
+		productService.updateProduct(id,product);
+		return "success";
+	}
 }

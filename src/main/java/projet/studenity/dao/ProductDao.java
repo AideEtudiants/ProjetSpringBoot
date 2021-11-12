@@ -5,11 +5,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import projet.studenity.model.Product;
-import projet.studenity.model.User;
 import projet.studenity.repository.ProductRepository;
 
 import javax.persistence.EntityManager;
 import javax.sql.DataSource;
+import javax.transaction.Transactional;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -44,9 +44,32 @@ public class ProductDao {
         return jdbcTemplate.query("select * from Product", new ProductDao.ProductRowMapper());
     }
 
+    @Transactional
     public void createProduct(Product product){
-
+        entityManager.createNativeQuery("INSERT INTO product (name,id_status,id_user,id_category) VALUES (?,?,?,?)")
+                .setParameter(1, product.getName())
+                .setParameter(2, product.getStatusCode())
+                .setParameter(3, product.getUserCode())
+                .setParameter(4, product.getCategoryCode())
+                .executeUpdate();
     }
+
+    @Transactional
+    public void updateProduct(long id,Product product){
+        entityManager.createNativeQuery("UPDATE product SET name=?, image=?, description=?, id_status=?, id_category=?, id_user=? WHERE id_product=?")
+                .setParameter(1, product.getName())
+                .setParameter(2, product.getImage())
+                .setParameter(3, product.getDescription())
+                .setParameter(4, product.getStatusCode())
+                .setParameter(5, product.getCategoryCode())
+                .setParameter(6, product.getUserCode())
+                .setParameter(7, id)
+                .executeUpdate();
+    }
+
+//    public void createProduct(Product product){
+//        productRepository.save(product);
+//    }
 
     public void deleteProductById(Long id){
         productRepository.deleteById(id);

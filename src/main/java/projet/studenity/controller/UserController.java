@@ -1,13 +1,11 @@
 package projet.studenity.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import projet.studenity.dao.UserDao;
 import projet.studenity.model.User;
+import projet.studenity.repository.UserRepository;
 import projet.studenity.service.ProductService;
 import projet.studenity.service.UserService;
 
@@ -15,14 +13,25 @@ import projet.studenity.service.UserService;
 import java.util.List;
 
 @RestController
-@RequestMapping(value="/user/find")
+@CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
 	@Autowired
 	private UserDao userDao;
+	@Autowired
+	private UserRepository userRepository;
 
 	@Autowired
 	private UserService userService;
 
+	@GetMapping("/users")
+	public List<User> getUsers() {
+		return (List<User>) userRepository.findAll();
+	}
+
+	@PostMapping("/users")
+	void addUser(@RequestBody User user) {
+		userRepository.save(user);
+	}
 	
 	@GetMapping(value="/test/{id}")
 	public String findNameUserById(@PathVariable("id") long id) {

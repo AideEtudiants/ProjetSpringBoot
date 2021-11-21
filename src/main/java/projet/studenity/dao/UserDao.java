@@ -6,12 +6,14 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.sql.DataSource;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import projet.studenity.model.Product;
 import projet.studenity.model.User;
 
 @Repository
@@ -36,6 +38,23 @@ public class UserDao {
 	
 	public List<User> findByFirstName(String firstName) {
 		return jdbcTemplate.query("select * from Users where first_name = ?", new UserRowMapper(), new Object[] {firstName});
+	}
+
+	@Transactional
+	public void createUser(User user){
+		entityManager.createNativeQuery("INSERT INTO product (id_user, first_name,last_name,email," +
+						"birth_date,study_level, establishment, certificate_regist, photo, password) VALUES (?,?,?,?,?,?,?,?,?,?)")
+				.setParameter(1, 5)
+				.setParameter(2, user.getFirstName())
+				.setParameter(3, user.getLastName())
+				.setParameter(4, user.getEmail())
+				.setParameter(5, user.getBirthDate())
+				.setParameter(6, user.getStudyLevel())
+				.setParameter(7, user.getEstablishment())
+				.setParameter(8, user.getCertificateRegist())
+				.setParameter(9, user.getPhoto())
+				.setParameter(10, user.getPassword())
+				.executeUpdate();
 	}
 
 //	public User getUserById(long id) {

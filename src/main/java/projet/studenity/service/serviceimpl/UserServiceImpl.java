@@ -16,22 +16,22 @@ public class UserServiceImpl implements UserService {
     UserDao userDao;
 
     @Override
-    public void createProduct(Product product) {
+    public void createUser(User user) {
+        userDao.createUser(user);
+    }
+
+    @Override
+    public void updateUser(String id, User user) {
 
     }
 
     @Override
-    public void updateProduct(String id, Product product) {
+    public void deleteUser(String id) {
 
     }
 
     @Override
-    public void deleteProduct(String id) {
-
-    }
-
-    @Override
-    public Collection<Product> getProducts() {
+    public Collection<Product> getUsers() {
         return null;
     }
 

@@ -7,10 +7,10 @@ import java.util.Collection;
 import java.util.List;
 
 public interface UserService {
-    public abstract void createProduct(Product product);
-    public abstract void updateProduct(String id, Product product);
-    public abstract void deleteProduct(String id);
-    public abstract Collection<Product> getProducts();
+    public abstract void createUser(User user);
+    public abstract void updateUser(String id, User user);
+    public abstract void deleteUser(String id);
+    public abstract Collection<Product> getUsers();
     public User findUserById(long id);
     public List<User> findUserByFirstName(String firstName);
 }

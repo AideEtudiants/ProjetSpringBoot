@@ -42,7 +42,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Collection<Product> getProducts() {
+    public List<Product> getProducts() {
         return null;
     }
 

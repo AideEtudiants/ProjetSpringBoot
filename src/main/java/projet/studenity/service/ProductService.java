@@ -10,7 +10,7 @@ public interface ProductService {
     public abstract void createProduct(Product product);
     public abstract void updateProduct(Long id, Product product);
     public abstract void deleteProduct(Long id);
-    public abstract Collection<Product> getProducts();
+    public abstract List<Product> getProducts();
     public Product findProductById(long id);
     public List<Product> findProductByName(String firstName);
 }

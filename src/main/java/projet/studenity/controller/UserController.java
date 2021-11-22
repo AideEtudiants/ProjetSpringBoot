@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.*;
 import projet.studenity.dao.UserDao;
 import projet.studenity.model.User;
 import projet.studenity.repository.UserRepository;
-import projet.studenity.service.ProductService;
 import projet.studenity.service.UserService;
 
 
@@ -30,7 +29,7 @@ public class UserController {
 
 	@PostMapping("/users")
 	void addUser(@RequestBody User user) {
-		userRepository.save(user);
+		userService.createUser(user);
 	}
 	
 	@GetMapping(value="/test/{id}")

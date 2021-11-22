@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import projet.studenity.dao.UserDao;
 import projet.studenity.model.Product;
 import projet.studenity.model.User;
+import projet.studenity.repository.UserRepository;
 import projet.studenity.service.UserService;
 
 import java.util.Collection;
@@ -15,9 +16,12 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserDao userDao;
 
+    @Autowired
+    UserRepository userRepository;
+
     @Override
     public void createUser(User user) {
-        userDao.createUser(user);
+        userRepository.save(user);
     }
 
     @Override

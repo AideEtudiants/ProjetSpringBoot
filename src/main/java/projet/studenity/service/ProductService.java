@@ -13,4 +13,6 @@ public interface ProductService {
     public abstract List<Product> getProducts();
     public Product findProductById(long id);
     public List<Product> findProductByName(String firstName);
+    public List<String> searchNameProduct();
+    public void reserveProduct(Long id);
 }

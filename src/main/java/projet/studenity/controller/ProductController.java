@@ -15,7 +15,6 @@ import projet.studenity.service.ProductService;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
-// @RequestMapping(value="/product")
 public class ProductController {
 
 	@Autowired
@@ -23,12 +22,18 @@ public class ProductController {
 
 	@Autowired
 	private ProductService productService;
+
 	@Autowired
-	private ProductRepository productRepository;
+	private ProductRepository productRepo;
   
 	@GetMapping(value="product/all")
 	public List<Product> getAllProducts() {
-		return (List<Product>) productRepository.findAll();
+		return productService.getProducts();
+	}
+
+	@GetMapping(value="/searchNameProduct")
+	public List<String> searchNameProduct(){
+		return productService.searchNameProduct();
 	}
 
 	@GetMapping(value="/{id}")
@@ -36,11 +41,10 @@ public class ProductController {
 		return productService.findProductById(id).toString();
 	}
 
-	@GetMapping(value="/{name}")
+	@GetMapping(value="/product/{name}")
 	public List<Product> findProductByName(@PathVariable("name") String name) {
 		List<Product> listProduct = productService.findProductByName(name);
-		return listProduct
-
+		return listProduct;
 	}
 
 	@GetMapping(value="/delete/{id}") //Attendre Product de FE
@@ -53,9 +57,11 @@ public class ProductController {
 		product.setUserCode(3L);
 		product.setStatusCode(1L);
 		product.setCategoryCode(1L);
-		productDao.createProduct(product);
+		productService.createProduct(product);
 		return "Success";
 	}
+
+
 
 	@GetMapping(value="/update/{id}/{name}/{image}/{description}/{statusCode}/{categoryCode}/{userId}") //Attendre Product de FE
 	public String updateProduct(@PathVariable("id") long id,@PathVariable("name") String name,@PathVariable("image") String image

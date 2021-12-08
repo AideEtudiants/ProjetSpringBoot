@@ -4,13 +4,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import projet.studenity.dao.ProductDao;
 import projet.studenity.model.Product;
+import projet.studenity.repository.ProductRepository;
 import projet.studenity.service.ProductService;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductDao productDao;
+    @Autowired
+    private ProductRepository productRepo;
 
 
     public Product findProductById(long id) {
@@ -28,8 +33,27 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<String> searchNameProduct() {
+        List<String> listName = new ArrayList<>();
+        List<Product> listProduct = productRepo.findAll();
+        for(Product product:listProduct){
+            listName.add(product.getName());
+        }
+        return listName;
+    }
+
+    @Override
+    public void reserveProduct(Long id) {
+        Product product = findProductById(id);
+        if(product.getAvailability()!= 3){
+            product.setAvailability(3L);
+        }
+        productDao.updateProduct(product.getId(),product);
+    }
+
+    @Override
     public void createProduct(Product product) {
-        productDao.createProduct(product);
+        productRepo.save(product);
     }
 
     @Override
@@ -44,7 +68,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> getProducts() {
-        return null;
+        return productRepo.findAll();
     }
 
 }

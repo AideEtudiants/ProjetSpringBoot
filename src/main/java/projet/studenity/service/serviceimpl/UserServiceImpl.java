@@ -21,6 +21,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void createUser(User user) {
+        List<User> userList = userRepository.findAll();
+        for(User userTemp : userList){
+            if(userTemp.getEmail()==user.getEmail()){
+                //condition
+            }
+        }
         userRepository.save(user);
     }
 

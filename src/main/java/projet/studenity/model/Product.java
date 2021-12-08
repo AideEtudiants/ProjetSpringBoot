@@ -16,7 +16,7 @@ public class Product {
     @Column(name="id_product")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-	private Long prix;
+	private Double prix;
 	private String name;
 	private String image;
     private String description;
@@ -26,10 +26,12 @@ public class Product {
     private Long categoryCode;
     @Column(name="id_user")
     private Long userCode;
-	public Long getPrix() {
+	@Column(name="id_availability")
+	private Long availability;
+	public Double getPrix() {
 		return prix;
 	}
-	public void setPrix(Long prix) {
+	public void setPrix(Double prix) {
 		this.prix = prix;
 	}
 	public Long getId() {
@@ -74,9 +76,27 @@ public class Product {
 	public void setUserCode(Long userCode) {
 		this.userCode = userCode;
 	}
+
+	public Long getAvailability() {
+		return availability;
+	}
+
+	public void setAvailability(Long availability) {
+		this.availability = availability;
+	}
+
 	@Override
 	public String toString() {
-		return "Product [id=" + id + ", name=" + name + ", image=" + image + ", description=" + description
-				+ ", statusCode=" + statusCode + ", categoryCode=" + categoryCode + ", userCode=" + userCode + "]";
+		return "Product{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", image='" + image + '\'' +
+				", description='" + description + '\'' +
+				", statusCode=" + statusCode +
+				", categoryCode=" + categoryCode +
+				", userCode=" + userCode +
+				", availability='" + availability + '\'' +
+				", prix='" + prix + '\'' +
+				'}';
 	}
 }

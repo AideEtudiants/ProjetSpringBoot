@@ -44,26 +44,27 @@ public class ProductDao {
         return jdbcTemplate.query("select * from Product", new ProductDao.ProductRowMapper());
     }
 
-    @Transactional
-    public void createProduct(Product product){
-        entityManager.createNativeQuery("INSERT INTO product (name,id_status,id_user,id_category) VALUES (?,?,?,?)")
-                .setParameter(1, product.getName())
-                .setParameter(2, product.getStatusCode())
-                .setParameter(3, product.getUserCode())
-                .setParameter(4, product.getCategoryCode())
-                .executeUpdate();
-    }
+//    @Transactional
+//    public void createProduct(Product product){
+//        entityManager.createNativeQuery("INSERT INTO product (name,id_status,id_user,id_category) VALUES (?,?,?,?)")
+//                .setParameter(1, product.getName())
+//                .setParameter(2, product.getStatusCode())
+//                .setParameter(3, product.getUserCode())
+//                .setParameter(4, product.getCategoryCode())
+//                .executeUpdate();
+//    }
 
     @Transactional
     public void updateProduct(long id,Product product){
-        entityManager.createNativeQuery("UPDATE product SET name=?, image=?, description=?, id_status=?, id_category=?, id_user=? WHERE id_product=?")
+        entityManager.createNativeQuery("UPDATE product SET name=?, image=?, description=?, id_status=?, id_category=?, id_user=?, id_availability=? WHERE id_product=?")
                 .setParameter(1, product.getName())
                 .setParameter(2, product.getImage())
                 .setParameter(3, product.getDescription())
                 .setParameter(4, product.getStatusCode())
                 .setParameter(5, product.getCategoryCode())
                 .setParameter(6, product.getUserCode())
-                .setParameter(7, id)
+                .setParameter(7, product.getAvailability())
+                .setParameter(8, id)
                 .executeUpdate();
     }
 

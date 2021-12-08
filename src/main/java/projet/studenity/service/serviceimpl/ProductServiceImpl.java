@@ -5,8 +5,6 @@ import org.springframework.stereotype.Service;
 import projet.studenity.dao.ProductDao;
 import projet.studenity.model.Product;
 import projet.studenity.service.ProductService;
-
-import java.util.Collection;
 import java.util.List;
 
 @Service

@@ -16,7 +16,8 @@ public class Product {
     @Column(name="id_product")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
+	private Long prix;
+	private String name;
 	private String image;
     private String description;
     @Column(name="id_status")
@@ -25,6 +26,12 @@ public class Product {
     private Long categoryCode;
     @Column(name="id_user")
     private Long userCode;
+	public Long getPrix() {
+		return prix;
+	}
+	public void setPrix(Long prix) {
+		this.prix = prix;
+	}
 	public Long getId() {
 		return id;
 	}

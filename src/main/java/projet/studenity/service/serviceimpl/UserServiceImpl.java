@@ -3,8 +3,10 @@ package projet.studenity.service.serviceimpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import projet.studenity.dao.UserDao;
+import projet.studenity.model.Cart;
 import projet.studenity.model.Product;
 import projet.studenity.model.User;
+import projet.studenity.repository.CartRepository;
 import projet.studenity.repository.UserRepository;
 import projet.studenity.service.UserService;
 

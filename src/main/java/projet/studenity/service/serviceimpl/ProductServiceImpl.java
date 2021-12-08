@@ -3,7 +3,9 @@ package projet.studenity.service.serviceimpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import projet.studenity.dao.ProductDao;
+import projet.studenity.model.Cart;
 import projet.studenity.model.Product;
+import projet.studenity.repository.CartRepository;
 import projet.studenity.repository.ProductRepository;
 import projet.studenity.service.ProductService;
 
@@ -17,58 +19,79 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductRepository productRepo;
 
-
     public Product findProductById(long id) {
+
         Product product = productDao.findProductById(id);
         return product;
     }
 
     @Override
     public List<Product> findProductByName(String name) {
-        if(productDao.findProductByName(name)!=null) {
-            List<Product> listProduct = productDao.findProductByName(name);
-            return listProduct;
-        }
-        else return null;
-    }
-
-    @Override
-    public List<String> searchNameProduct() {
-        List<String> listName = new ArrayList<>();
         List<Product> listProduct = productRepo.findAll();
+        List<Product> listProductWithName = new ArrayList<>();
         for(Product product:listProduct){
-            listName.add(product.getName());
+            if(product.getName().equalsIgnoreCase(name)){
+                listProductWithName.add(product);
+            }
         }
-        return listName;
+        if(listProductWithName.isEmpty()) return null;
+        return listProductWithName;
     }
 
     @Override
-    public void reserveProduct(Long id) {
+    public boolean reserveProduct(Long id) {
         Product product = findProductById(id);
         if(product.getAvailability()!= 3){
             product.setAvailability(3L);
         }
-        productDao.updateProduct(product.getId(),product);
+        try {
+            productDao.updateProduct(product);
+        }catch(Exception e){return false;}
+        return true;
     }
 
     @Override
-    public void createProduct(Product product) {
-        productRepo.save(product);
+    public List<Product> findProductByCategory(Long idCategory) {
+        List<Product> listProduct = productRepo.findAll();
+        List<Product> listProductByCategory = new ArrayList<>();
+        for(Product product:listProduct){
+            if(product.getCategoryCode()==idCategory){
+                listProductByCategory.add(product);
+            }
+        }
+        if(listProductByCategory.isEmpty()) return null;
+        return listProductByCategory;
     }
 
     @Override
-    public void updateProduct(Long id, Product product) {
-        productDao.updateProduct(id,product);
+    public boolean createProduct(Product product) {
+        try {
+            productRepo.save(product);
+        }catch (Exception e){
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public void deleteProduct(Long id) {
-        productDao.deleteProductById(id);
+    public boolean updateProduct(Product product) {
+        productDao.updateProduct(product);
+        return true;
+    }
+
+    @Override
+    public boolean deleteProduct(Long id) {
+        try {
+            productRepo.deleteById(id);
+        }
+        catch(Exception e){
+            return false;
+        }
+        return true;
     }
 
     @Override
     public List<Product> getProducts() {
         return productRepo.findAll();
     }
-
 }

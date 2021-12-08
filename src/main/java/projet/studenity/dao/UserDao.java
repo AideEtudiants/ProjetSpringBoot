@@ -42,18 +42,17 @@ public class UserDao {
 
 	@Transactional
 	public void createUser(User user){
-		entityManager.createNativeQuery("INSERT INTO product (id_user, first_name,last_name,email," +
-						"birth_date,study_level, establishment, certificate_regist, photo, password) VALUES (?,?,?,?,?,?,?,?,?,?)")
-				.setParameter(1, 5)
-				.setParameter(2, user.getFirstName())
-				.setParameter(3, user.getLastName())
-				.setParameter(4, user.getEmail())
-				.setParameter(5, user.getBirthDate())
-				.setParameter(6, user.getStudyLevel())
-				.setParameter(7, user.getEstablishment())
-				.setParameter(8, user.getCertificateRegist())
-				.setParameter(9, user.getPhoto())
-				.setParameter(10, user.getPassword())
+		entityManager.createNativeQuery("INSERT INTO product (first_name,last_name,email," +
+						"birth_date,study_level, establishment, certificate_regist, photo, password) VALUES (?,?,?,?,?,?,?,?,?)")
+				.setParameter(1, user.getFirstName())
+				.setParameter(2, user.getLastName())
+				.setParameter(3, user.getEmail())
+				.setParameter(4, user.getBirthDate())
+				.setParameter(5, user.getStudyLevel())
+				.setParameter(6, user.getEstablishment())
+				.setParameter(7, user.getCertificateRegist())
+				.setParameter(8, user.getPhoto())
+				.setParameter(9, user.getPassword())
 				.executeUpdate();
 	}
 

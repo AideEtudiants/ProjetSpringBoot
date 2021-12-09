@@ -15,29 +15,29 @@ public class Product {
 	@Id
     @Column(name="id_product")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 	private Double price;
 	private String name;
 	private String image;
     private String description;
     @Column(name="id_status")
-    private Long statusCode;
+    private int statusCode;
     @Column(name="id_category")
-    private Long categoryCode;
+    private int categoryCode;
     @Column(name="id_user")
-    private Long userCode;
+    private int userCode;
 	@Column(name="id_availability")
-	private Long availability;
+	private int availability;
 	public Double getPrice() {
 		return price;
 	}
 	public void setPrice(Double price) {
 		this.price = price;
 	}
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getName() {
@@ -58,30 +58,30 @@ public class Product {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public Long getStatusCode() {
+	public int getStatusCode() {
 		return statusCode;
 	}
-	public void setStatusCode(Long statusCode) {
+	public void setStatusCode(int statusCode) {
 		this.statusCode = statusCode;
 	}
-	public Long getCategoryCode() {
+	public int getCategoryCode() {
 		return categoryCode;
 	}
-	public void setCategoryCode(Long categoryCode) {
+	public void setCategoryCode(int categoryCode) {
 		this.categoryCode = categoryCode;
 	}
-	public Long getUserCode() {
+	public int getUserCode() {
 		return userCode;
 	}
-	public void setUserCode(Long userCode) {
+	public void setUserCode(int userCode) {
 		this.userCode = userCode;
 	}
 
-	public Long getAvailability() {
+	public int getAvailability() {
 		return availability;
 	}
 
-	public void setAvailability(Long availability) {
+	public void setAvailability(int availability) {
 		this.availability = availability;
 	}
 

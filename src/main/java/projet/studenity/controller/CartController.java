@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import projet.studenity.model.Cart;
+import projet.studenity.model.Product;
 import projet.studenity.service.CartService;
 
 @RestController
@@ -25,23 +26,28 @@ public class CartController {
     }
 
     @PostMapping(value="/pay")
-    public boolean payCart(@RequestBody long idUser){
+    public boolean payCart(@RequestBody int idUser){
         return cartService.payCart(idUser);
     }
 
     @PostMapping(value="/deleteAll")
-    public boolean deleteAll(@RequestBody long idUser){return cartService.deleteAllFromCart(idUser);}
+    public boolean deleteAll(@RequestBody int idUser){return cartService.deleteAllFromCart(idUser);}
 
     @PostMapping(value="/totalPrice")
-    public Double totalPrice(@RequestBody long idUser){
+    public Double totalPrice(@RequestBody int idUser){
         return cartService.totalPrice(idUser);
     }
 
-    @GetMapping(value="/test/")
+    @PostMapping(value="/list")
+    public List<Product> listProduct(@RequestBody int idUser){
+        return cartService.listProduct(idUser);
+    }
+
+    @GetMapping(value="/test")
     public boolean test() {
         Cart cart = new Cart();
-        cart.setIdUser(7L);
-        cart.setIdProduct(221L);
+        cart.setIdUser(7);
+        cart.setIdProduct(220);
         return cartService.addToCart(cart);
     }
 }

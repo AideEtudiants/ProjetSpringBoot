@@ -11,7 +11,7 @@ public class User {
     @Id
     @Column(name="id_user")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
     @Column(name="last_name")
     private String lastName;
     @Column(name="first_name")
@@ -27,11 +27,11 @@ public class User {
     private String certificateRegist;
     private String photo;
 
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Long id_user) {
+	public void setId(int id_user) {
 		this.id = id_user;
 	}
 

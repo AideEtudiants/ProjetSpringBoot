@@ -8,33 +8,33 @@ public class Cart {
     @Id
     @Column(name="id_Cart")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
     @Column(name="id_User")
-    private Long idUser;
+    private int idUser;
     @Column(name="id_Product")
-    private Long idProduct;
+    private int idProduct;
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public Long getIdUser() {
+    public int getIdUser() {
         return idUser;
     }
 
-    public void setIdUser(Long idUser) {
+    public void setIdUser(int idUser) {
         this.idUser = idUser;
     }
 
-    public Long getIdProduct() {
+    public int getIdProduct() {
         return idProduct;
     }
 
-    public void setIdProduct(Long idProduct) {
+    public void setIdProduct(int idProduct) {
         this.idProduct = idProduct;
     }
 }

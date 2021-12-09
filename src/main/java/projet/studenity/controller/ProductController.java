@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import projet.studenity.model.Cart;
 import projet.studenity.model.Product;
 import projet.studenity.service.CartService;
 import projet.studenity.service.ProductService;
@@ -30,7 +29,7 @@ public class ProductController {
 	}
 
 	@PostMapping(value="/delete")
-	public boolean deleteProductById(@RequestBody long id){
+	public boolean deleteProductById(@RequestBody int id){
 		return productService.deleteProduct(id);
 	}
 
@@ -45,17 +44,17 @@ public class ProductController {
 	}
 
 	@PostMapping(value="/reserve")
-	public boolean reserveProduct(@RequestBody long id){
+	public boolean reserveProduct(@RequestBody int id){
 		return productService.reserveProduct(id);
 	}
 
 	@PostMapping(value="/searchByCategory")
-	public List<Product> findProductByCategory(@RequestBody Long idCategory){
+	public List<Product> findProductByCategory(@RequestBody int idCategory){
 		return productService.findProductByCategory(idCategory);
 	}
 
 	@GetMapping(value="/test")
 	public List<Product> test() {
-		return findProductByCategory(2L);
+		return findProductByCategory(2);
 	}
 }

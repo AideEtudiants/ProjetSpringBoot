@@ -32,7 +32,7 @@ public class UserDao {
 		return jdbcTemplate.queryForObject("select count(1) from Users", Integer.class);
 	}
   
-	public User findById(long id) {
+	public User findById(int id) {
 		return this.entityManager.find(User.class, id);
 	}
 	
@@ -74,7 +74,7 @@ public class UserDao {
 //				.executeUpdate();
 //	}
 
-//	public User getUserById(long id) {
+//	public User getUserById(int id) {
 //		return jdbcTemplate.queryForObject("select * from Users where id_user = ?", new UserRowMapper(), new Object[] {id});
 //	}
 
@@ -86,7 +86,7 @@ public class UserDao {
 	@Override
     public User mapRow(ResultSet rs, int rowNum) throws SQLException {
       	User user = new User();
-      	user.setId(rs.getLong("id_user"));
+      	user.setId(rs.getInt("id_user"));
       	user.setFirstName(rs.getString("first_name"));
       	user.setLastName(rs.getString("last_name"));
       	user.setEmail(rs.getString("Email"));

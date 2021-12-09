@@ -18,14 +18,14 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepo;
 
-    public User findUserById(long id) {
+    public User findUserById(int id) {
 
         User user = userDao.findById(id);
         return user;
     }
 
     @Override
-    public boolean deleteUser(Long id) {
+    public boolean deleteUser(int id) {
         try {
             userRepo.deleteById(id);
         }

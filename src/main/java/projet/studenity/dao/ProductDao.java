@@ -32,7 +32,7 @@ public class ProductDao {
         return jdbcTemplate.queryForObject("select count(1) from Product", Integer.class);
     }
 
-    public Product findProductById(long id) {
+    public Product findProductById(int id) {
         return this.entityManager.find(Product.class, id);
     }
 
@@ -73,13 +73,13 @@ public class ProductDao {
         @Override
         public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
             Product product = new Product();
-            product.setId(rs.getLong("id_product"));
+            product.setId(rs.getInt("id_product"));
             product.setName(rs.getString("name"));
             product.setDescription(rs.getString("description"));
-            product.setCategoryCode(rs.getLong("id_category"));
-            product.setStatusCode(rs.getLong("id_status"));
+            product.setCategoryCode(rs.getInt("id_category"));
+            product.setStatusCode(rs.getInt("id_status"));
             product.setImage(rs.getString("image"));
-            product.setUserCode(rs.getLong("id_user"));
+            product.setUserCode(rs.getInt("id_user"));
             return product;
         }
     }

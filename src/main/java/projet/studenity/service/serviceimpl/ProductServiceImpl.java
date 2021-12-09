@@ -19,7 +19,7 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductRepository productRepo;
 
-    public Product findProductById(long id) {
+    public Product findProductById(int id) {
 
         Product product = productDao.findProductById(id);
         return product;
@@ -39,10 +39,10 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public boolean reserveProduct(Long id) {
+    public boolean reserveProduct(int id) {
         Product product = findProductById(id);
         if(product.getAvailability()!= 3){
-            product.setAvailability(3L);
+            product.setAvailability(3);
         }
         try {
             productDao.updateProduct(product);
@@ -51,7 +51,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> findProductByCategory(Long idCategory) {
+    public List<Product> findProductByCategory(int idCategory) {
         List<Product> listProduct = productRepo.findAll();
         List<Product> listProductByCategory = new ArrayList<>();
         for(Product product:listProduct){
@@ -80,7 +80,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public boolean deleteProduct(Long id) {
+    public boolean deleteProduct(int id) {
         try {
             productRepo.deleteById(id);
         }

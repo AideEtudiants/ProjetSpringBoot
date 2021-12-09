@@ -9,8 +9,8 @@ import java.util.List;
 public interface UserService {
     public abstract boolean createUser(User user);
     public abstract boolean updateUser(User user);
-    public abstract boolean deleteUser(Long id);
+    public abstract boolean deleteUser(int id);
     public abstract List<User> getUsers();
-    public User findUserById(long id);
+    public User findUserById(int id);
     public List<User> findUserByFirstName(String firstName);
 }

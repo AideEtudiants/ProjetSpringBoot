@@ -9,6 +9,7 @@ import projet.studenity.repository.ProductRepository;
 import projet.studenity.service.CartService;
 import projet.studenity.service.ProductService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -19,6 +20,25 @@ public class CartServiceImpl implements CartService {
     ProductRepository productRepo;
     @Autowired
     ProductService productService;
+
+    @Override
+    public List<Product> listProduct(int idUser){
+        List<Product> listProduct = new ArrayList<>();
+        List<Cart> listCart = cartRepo.findAll();
+        try {
+            for (Cart cart : listCart) {
+                if (cart.getIdUser() == idUser) {
+                    //chercher le produit de cette utilisateur
+                    Product product = productService.findProductById(cart.getIdProduct());
+                    listProduct.add(product);
+                }
+            }
+        }catch(Exception e){
+            return null;
+        }
+        if(listProduct.isEmpty()) return null;
+        return listProduct;
+    }
 
     @Override
     public boolean addToCart(Cart cart) {
@@ -35,13 +55,13 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public boolean payCart(Long idUser){
+    public boolean payCart(int idUser){
         List<Cart> listCart = cartRepo.findAll();
         try {
             for (Cart cart : listCart) {
                 if (cart.getIdUser() == idUser) {
                     Product product = productService.findProductById(cart.getIdProduct()); //chercher le produit de cette utilisateur
-                    product.setAvailability(2L); //Passer la disponibilite a Solde
+                    product.setAvailability(2); //Passer la disponibilite a Solde
                     productService.updateProduct(product);
                     cartRepo.delete(cart);
                 }
@@ -53,7 +73,7 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public boolean deleteAllFromCart(Long idUser) {
+    public boolean deleteAllFromCart(int idUser) {
         List<Cart> listCart = cartRepo.findAll();
         try {
             for (Cart cart : listCart) {
@@ -68,7 +88,7 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public Double totalPrice(Long idUser) {
+    public Double totalPrice(int idUser) {
         List<Cart> listCart = cartRepo.findAll();
         Double price=0.0;
         try {

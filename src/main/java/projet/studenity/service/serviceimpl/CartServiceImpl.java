@@ -29,8 +29,8 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public boolean deleteFromCart(Long id) {
-        cartRepo.deleteById(id);
+    public boolean deleteFromCart(Cart cart) {
+        cartRepo.delete(cart);
         return true;
     }
 
@@ -50,5 +50,38 @@ public class CartServiceImpl implements CartService {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public boolean deleteAllFromCart(Long idUser) {
+        List<Cart> listCart = cartRepo.findAll();
+        try {
+            for (Cart cart : listCart) {
+                if (cart.getIdUser() == idUser) {
+                    cartRepo.delete(cart);
+                }
+            }
+        }catch(Exception e){
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public Double totalPrice(Long idUser) {
+        List<Cart> listCart = cartRepo.findAll();
+        Double price=0.0;
+        try {
+            for (Cart cart : listCart) {
+                if (cart.getIdUser() == idUser) {
+                    //chercher le produit de cette utilisateur
+                    Product product = productService.findProductById(cart.getIdProduct());
+                    price +=product.getPrice();
+                }
+            }
+        }catch(Exception e){
+            return null;
+        }
+        return price;
     }
 }

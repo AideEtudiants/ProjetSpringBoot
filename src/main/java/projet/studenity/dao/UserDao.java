@@ -41,9 +41,10 @@ public class UserDao {
 	}
 
 	@Transactional
-	public void createUser(User user){
-		entityManager.createNativeQuery("INSERT INTO product (first_name,last_name,email," +
-						"birth_date,study_level, establishment, certificate_regist, photo, password) VALUES (?,?,?,?,?,?,?,?,?)")
+	public void updateUser(User user){
+		entityManager.createNativeQuery("UPDATE user SET first_name=?, last_name=?," +
+						" email=?, birth_date=?, study_level=?, establishment=?, certificate_regist=?, " +
+						"photo=?, password=? WHERE id_user=?")
 				.setParameter(1, user.getFirstName())
 				.setParameter(2, user.getLastName())
 				.setParameter(3, user.getEmail())
@@ -53,8 +54,25 @@ public class UserDao {
 				.setParameter(7, user.getCertificateRegist())
 				.setParameter(8, user.getPhoto())
 				.setParameter(9, user.getPassword())
+				.setParameter(10, user.getId())
 				.executeUpdate();
 	}
+
+//	@Transactional
+//	public void createUser(User user){
+//		entityManager.createNativeQuery("INSERT INTO product (first_name,last_name,email," +
+//						"birth_date,study_level, establishment, certificate_regist, photo, password) VALUES (?,?,?,?,?,?,?,?,?)")
+//				.setParameter(1, user.getFirstName())
+//				.setParameter(2, user.getLastName())
+//				.setParameter(3, user.getEmail())
+//				.setParameter(4, user.getBirthDate())
+//				.setParameter(5, user.getStudyLevel())
+//				.setParameter(6, user.getEstablishment())
+//				.setParameter(7, user.getCertificateRegist())
+//				.setParameter(8, user.getPhoto())
+//				.setParameter(9, user.getPassword())
+//				.executeUpdate();
+//	}
 
 //	public User getUserById(long id) {
 //		return jdbcTemplate.queryForObject("select * from Users where id_user = ?", new UserRowMapper(), new Object[] {id});

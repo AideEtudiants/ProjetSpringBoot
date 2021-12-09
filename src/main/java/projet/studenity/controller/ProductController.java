@@ -49,8 +49,13 @@ public class ProductController {
 		return productService.reserveProduct(id);
 	}
 
+	@PostMapping(value="/searchByCategory")
+	public List<Product> findProductByCategory(@RequestBody Long idCategory){
+		return productService.findProductByCategory(idCategory);
+	}
+
 	@GetMapping(value="/test")
-	public void test() {
-		cartService.payCart(4L);
+	public List<Product> test() {
+		return findProductByCategory(2L);
 	}
 }

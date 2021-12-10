@@ -21,10 +21,7 @@ public class CartController {
     }
 
     @PostMapping(value="/create")
-    public boolean addToCart(@RequestBody int idUser, int idProduct){
-        Cart cart = new Cart();
-        cart.setIdUser(idUser);
-        cart.setIdProduct(idProduct);
+    public boolean addToCart(@RequestBody Cart cart){
         return cartService.addToCart(cart);
     }
 

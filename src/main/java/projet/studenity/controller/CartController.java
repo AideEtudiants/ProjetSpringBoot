@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import projet.studenity.model.Cart;
 import projet.studenity.model.Product;
+import projet.studenity.repository.CartRepository;
 import projet.studenity.service.CartService;
 
 @RestController
@@ -15,14 +16,17 @@ public class CartController {
     @Autowired
     private CartService cartService;
 
+    @Autowired
+    private CartRepository cartRepo;
+
     @PostMapping(value="/delete")
-    public boolean deleteFromCart(@RequestBody Cart cart){
-        return cartService.deleteFromCart(cart);
+    public void deleteFromCart(@RequestBody int id){
+      cartRepo.deleteById(id);
     }
 
     @PostMapping(value="/create")
-    public boolean addToCart(@RequestBody Cart cart){
-        return cartService.addToCart(cart);
+    public void addToCart(@RequestBody Cart cart){
+        cartRepo.save(cart);
     }
 
     @PostMapping(value="/pay")

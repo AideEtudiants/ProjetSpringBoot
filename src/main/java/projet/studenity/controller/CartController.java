@@ -46,7 +46,7 @@ public class CartController {
     @GetMapping(value="/test")
     public boolean test() {
         Cart cart = new Cart();
-        cart.setIdUser(7);
+        cart.setIdUser(4);
         cart.setIdProduct(220);
         return cartService.addToCart(cart);
     }

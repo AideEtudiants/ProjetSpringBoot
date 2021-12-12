@@ -42,15 +42,31 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public boolean addToCart(Cart cart) {
-        try{
-            cartRepo.save(cart);}
-        catch(Exception e){return false;}
+        try {
+            //chercher le produit de cette utilisateur
+            Product product = productService.findProductById(cart.getIdProduct());
+            if (product.getQuantity()==0){return false;}
+            product.setQuantity(product.getQuantity()-1);
+            if(product.getQuantity()==0) {product.setAvailability(3);} //Passer la disponibilite a Reserve
+            productService.updateProduct(product);
+            cartRepo.save(cart);
+        }catch(Exception e){
+            return false;
+        }
         return true;
     }
 
     @Override
     public boolean deleteFromCart(Cart cart) {
-        cartRepo.delete(cart);
+        try {
+            //chercher le produit de cette utilisateur
+            Product product = productService.findProductById(cart.getIdProduct());
+            product.setAvailability(1); //Passer la disponibilite a Available
+            productService.updateProduct(product);
+            cartRepo.delete(cart);
+        }catch(Exception e){
+            return false;
+        }
         return true;
     }
 
@@ -78,6 +94,9 @@ public class CartServiceImpl implements CartService {
         try {
             for (Cart cart : listCart) {
                 if (cart.getIdUser() == idUser) {
+                    Product product = productService.findProductById(cart.getIdProduct());
+                    product.setAvailability(1); //Passer la disponibilite a Available
+                    productService.updateProduct(product);
                     cartRepo.delete(cart);
                 }
             }

@@ -46,17 +46,16 @@ public class ProductDao {
 
     @Transactional
     public void updateProduct(Product product){
-        entityManager.createNativeQuery("UPDATE product SET name=?, image=?, description=?, id_status=?, id_category=?, id_user=?, id_availability=?, price=?, quantity=? WHERE id_product=?")
+        entityManager.createNativeQuery("UPDATE product SET name=?, image=?, description=?, id_status=?, id_category=?, id_availability=?, price=?, quantity=? WHERE id_product=?")
                 .setParameter(1, product.getName())
                 .setParameter(2, product.getImage())
                 .setParameter(3, product.getDescription())
                 .setParameter(4, product.getStatusCode())
                 .setParameter(5, product.getCategoryCode())
-                .setParameter(6, product.getUserCode())
-                .setParameter(7, product.getAvailability())
-                .setParameter(8, product.getPrice())
-                .setParameter(9, product.getQuantity())
-                .setParameter(10, product.getId())
+                .setParameter(6, product.getAvailability())
+                .setParameter(7, product.getPrice())
+                .setParameter(8, product.getQuantity())
+                .setParameter(9, product.getId())
                 .executeUpdate();
     }
 
@@ -80,7 +79,6 @@ public class ProductDao {
             product.setCategoryCode(rs.getInt("id_category"));
             product.setStatusCode(rs.getInt("id_status"));
             product.setImage(rs.getString("image"));
-            product.setUserCode(rs.getInt("id_user"));
             return product;
         }
     }

@@ -24,8 +24,6 @@ public class Product {
     private int statusCode;
     @Column(name="id_category")
     private int categoryCode;
-    @Column(name="id_user")
-    private int userCode;
 	@Column(name="id_availability")
 	private int availability;
 	private int quantity;
@@ -72,12 +70,6 @@ public class Product {
 	public void setCategoryCode(int categoryCode) {
 		this.categoryCode = categoryCode;
 	}
-	public int getUserCode() {
-		return userCode;
-	}
-	public void setUserCode(int userCode) {
-		this.userCode = userCode;
-	}
 	public int getAvailability() {
 		return availability;
 	}
@@ -100,7 +92,6 @@ public class Product {
 				", description='" + description + '\'' +
 				", statusCode=" + statusCode +
 				", categoryCode=" + categoryCode +
-				", userCode=" + userCode +
 				", availability='" + availability + '\'' +
 				", price='" + price + '\'' +
 				", quantity='" + quantity + '\'' +

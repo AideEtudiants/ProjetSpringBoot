@@ -66,6 +66,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public boolean createProduct(Product product) {
         try {
+            product.setAvailability(1);
             productRepo.save(product);
         }catch (Exception e){
             return false;

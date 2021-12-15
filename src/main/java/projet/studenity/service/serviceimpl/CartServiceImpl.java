@@ -50,11 +50,11 @@ public class CartServiceImpl implements CartService {
             //S'il exist deja idUser + idProduit dans Cart, mets a jours la quantite
             for(Cart c: listCart){
                 if(c.getIdUser() == cart.getIdUser() && c.getIdProduct()==cart.getIdProduct()){
-                    c.setQuantity(c.getQuantity()+cart.getQuantity());
+                    c.setQuantity(c.getQuantity()+1);
                     cartDao.updateCart(c);
                     Product product = productService.findProductById(cart.getIdProduct());
-                    if (product.getQuantity()==0 || cart.getQuantity() > product.getQuantity()){return false;}
-                    product.setQuantity(product.getQuantity()-cart.getQuantity());
+                    if (product.getQuantity()==0){return false;}
+                    product.setQuantity(product.getQuantity()-1);
                     if(product.getQuantity()==0) {product.setAvailability(3);} //Passer la disponibilite a Reserve
                     productService.updateProduct(product);
                     return true;
@@ -66,6 +66,7 @@ public class CartServiceImpl implements CartService {
             product.setQuantity(product.getQuantity()-1);
             if(product.getQuantity()==0) {product.setAvailability(3);} //Passer la disponibilite a Reserve
             productService.updateProduct(product);
+            cart.setQuantity(1);
             cartRepo.save(cart);
         }catch(Exception e){
             return false;

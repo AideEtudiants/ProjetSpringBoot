@@ -54,7 +54,16 @@ public class ProductController {
 	}
 
 	@GetMapping(value="/test")
-	public List<Product> test() {
-		return findProductByCategory(2);
+	public boolean test() {
+		Product product = new Product();
+		product.setName("Clavier");
+		product.setImage("image");
+		product.setDescription("description");
+		product.setStatusCode(1);
+		product.setCategoryCode(2);
+		product.setAvailability(2);
+		product.setPrice(100.0);
+		product.setQuantity(3);
+		return productService.createProduct(product);
 	}
 }

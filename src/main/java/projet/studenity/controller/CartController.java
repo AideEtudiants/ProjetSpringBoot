@@ -39,7 +39,7 @@ public class CartController {
     }
 
     @PostMapping(value="/list")
-    public List<Product> listProduct(@RequestBody int idUser){
+    public List<Product> listProductInCart(@RequestBody int idUser){
         return cartService.listProduct(idUser);
     }
 

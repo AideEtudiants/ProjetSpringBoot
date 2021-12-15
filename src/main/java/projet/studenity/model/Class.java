@@ -1,18 +1,18 @@
 package projet.studenity.model;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 @Table(name="CLASS")
 public class Class {
     @Id
-    @Column(name="id_class")
+    @Column(name="ID_CLASS")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
     private String description;
-    private Date date;
+    @Column(name="start_date")
+    private String startDate;
 
     public int getId() {
         return id;
@@ -38,11 +38,11 @@ public class Class {
         this.description = description;
     }
 
-    public Date getDate() {
-        return date;
+    public String getDate() {
+        return startDate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDate(String startDate) {
+        this.startDate = startDate;
     }
 }

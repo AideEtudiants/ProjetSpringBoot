@@ -19,7 +19,7 @@ public class User {
     private String email;
     private String 	password;
     @Column(name="birth_date")
-    private Date birthDate;
+    private String birthDate;
     @Column(name="study_level")
     private String studyLevel;
     private String establishment;
@@ -67,11 +67,11 @@ public class User {
 		this.password = password;
 	}
 
-	public Date getBirthDate() {
+	public String getBirthDate() {
 		return birthDate;
 	}
 
-	public void setBirthDate(Date birthDate) {
+	public void setBirthDate(String birthDate) {
 		this.birthDate = birthDate;
 	}
 

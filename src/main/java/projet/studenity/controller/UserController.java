@@ -48,4 +48,19 @@ public class UserController {
 		List<User> listUser = userService.findUserByFirstName(firstName);
 		return listUser.toString();
 	}
+
+	@GetMapping(value="/tests")
+	public void test() {
+		User user = new User();
+		user.setLastName("test");
+		user.setEmail("le@");
+		user.setFirstName("dddd");
+		user.setEstablishment("a");
+		user.setCertificateRegist("a");
+		user.setPassword("a");
+		user.setStudyLevel("a");
+		user.setPhoto("a");
+
+		userRepository.save(user);
+	}
 }

@@ -47,12 +47,12 @@ public class CartServiceImpl implements CartService {
     public boolean addToCart(Cart cart) {
         try {
             List<Cart> listCart = cartRepo.findAll();
+            Product product = productService.findProductById(cart.getIdProduct());
             //S'il exist deja idUser + idProduit dans Cart, mets a jours la quantite
             for(Cart c: listCart){
                 if(c.getIdUser() == cart.getIdUser() && c.getIdProduct()==cart.getIdProduct()){
                     c.setQuantity(c.getQuantity()+1);
                     cartDao.updateCart(c);
-                    Product product = productService.findProductById(cart.getIdProduct());
                     if (product.getQuantity()==0){return false;}
                     product.setQuantity(product.getQuantity()-1);
                     if(product.getQuantity()==0) {product.setAvailability(3);} //Passer la disponibilite a Reserve
@@ -61,7 +61,6 @@ public class CartServiceImpl implements CartService {
                 }
             }
             //chercher le produit de cette utilisateur
-            Product product = productService.findProductById(cart.getIdProduct());
             if (product.getQuantity()==0){return false;}
             product.setQuantity(product.getQuantity()-1);
             if(product.getQuantity()==0) {product.setAvailability(3);} //Passer la disponibilite a Reserve
@@ -87,6 +86,7 @@ public class CartServiceImpl implements CartService {
             }
             Product product = productService.findProductById(cart.getIdProduct());
             if(product.getAvailability()!=1) product.setAvailability(1); //Passer la disponibilite a Available
+            product.setQuantity(product.getQuantity()+cart.getQuantity()); //Retour quantite a product
             productService.updateProduct(product);
             cartRepo.delete(cart);
         }catch(Exception e){
@@ -121,6 +121,7 @@ public class CartServiceImpl implements CartService {
                 if (cart.getIdUser() == idUser) {
                     Product product = productService.findProductById(cart.getIdProduct());
                     product.setAvailability(1); //Passer la disponibilite a Available
+                    product.setQuantity(product.getQuantity()+cart.getQuantity());
                     productService.updateProduct(product);
                     cartRepo.delete(cart);
                 }

@@ -77,6 +77,13 @@ public class CartServiceImpl implements CartService {
     public boolean deleteFromCart(Cart cart) {
         try {
             //chercher le produit de cette utilisateur
+            List<Cart> cartList = cartRepo.findAll();
+            for(Cart c: cartList){
+                if(c.getIdUser()==cart.getIdUser() && c.getIdProduct()==c.getIdProduct()){
+                    cart.setId(c.getId());
+                    cart.setQuantity(c.getQuantity());
+                }
+            }
             Product product = productService.findProductById(cart.getIdProduct());
             if(product.getAvailability()!=1) product.setAvailability(1); //Passer la disponibilite a Available
             productService.updateProduct(product);

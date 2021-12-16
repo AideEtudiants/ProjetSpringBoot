@@ -13,6 +13,8 @@ public class Class {
     private String description;
     @Column(name="start_date")
     private String startDate;
+    @Column(name="id_user")
+    private int userId;
 
     public int getId() {
         return id;
@@ -38,11 +40,19 @@ public class Class {
         this.description = description;
     }
 
-    public String getDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setDate(String startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }

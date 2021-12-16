@@ -15,6 +15,11 @@ public class ClassController {
     @Autowired
     private ClassService classService;
 
+    @PostMapping(value="/listClassByUser")
+    public List<Class> listClassByUser(@RequestBody int idUser){
+        return classService.listClassByUser(idUser);
+    }
+
     @PostMapping(value="/delete")
     public boolean deleteUserFromClass(@RequestBody ClassUser classUser){
         return classService.deleteUserFromClass(classUser);
@@ -38,12 +43,7 @@ public class ClassController {
     @PostMapping(value="/deleteClass")
     public boolean deleteClass(@RequestBody int idClass){return classService.deleteClass(idClass);}
 
-    @PostMapping(value="/listClassByUser")
-    public List<Class> listClassByUser(@RequestBody int idUser){
-        return classService.listClassByUser(idUser);
-    }
-
-    @PostMapping(value="/list")
+    @GetMapping(value="/list")
     public List<Class> listClass(){
         return classService.listClass();
     }
@@ -52,7 +52,7 @@ public class ClassController {
     public boolean test() {
         Class classes = new Class();
         classes.setId(1);
-        classes.setDate("15/12/2021");
+        classes.setStartDate("15/12/2021");
         classes.setDescription("Examen prepare");
         classes.setName("Programmation Concurrente");
         return classService.updateClass(classes);

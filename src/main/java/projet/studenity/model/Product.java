@@ -26,6 +26,8 @@ public class Product {
     private int categoryCode;
 	@Column(name="id_availability")
 	private int availability;
+	@Column(name="id_user")
+	private int userId;
 	private int quantity;
 
 	public Double getPrice() {
@@ -81,6 +83,14 @@ public class Product {
 	}
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
+	}
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
 	@Override

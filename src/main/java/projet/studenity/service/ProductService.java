@@ -13,4 +13,5 @@ public interface ProductService {
     public List<Product> findProductByName(String firstName);
     public boolean reserveProduct(int id);
     public List<Product> findProductByCategory(int idCategory);
+    public List<Product> listProductByUser(int idUser);
 }

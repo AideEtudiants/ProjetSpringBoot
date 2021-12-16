@@ -7,6 +7,7 @@ import projet.studenity.model.Cart;
 import projet.studenity.model.Product;
 import projet.studenity.repository.CartRepository;
 import projet.studenity.repository.ProductRepository;
+import projet.studenity.repository.UserRepository;
 import projet.studenity.service.ProductService;
 
 import java.util.ArrayList;
@@ -18,6 +19,8 @@ public class ProductServiceImpl implements ProductService {
     private ProductDao productDao;
     @Autowired
     private ProductRepository productRepo;
+    @Autowired
+    private UserRepository userRepo;
 
     public Product findProductById(int id) {
 
@@ -64,8 +67,22 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<Product> listProductByUser(int idUser) {
+        List<Product> products = productRepo.findAll();
+        List<Product> productByUser = new ArrayList<>();
+        for(Product product: products){
+            if(product.getUserId()==idUser){
+                productByUser.add(product);
+            }
+        }
+        if(productByUser.isEmpty()) return null;
+        return productByUser;
+    }
+
+    @Override
     public boolean createProduct(Product product) {
         try {
+            product.setUserId(4); //Pour tester, a faire en Front
             product.setAvailability(1);
             productRepo.save(product);
         }catch (Exception e){

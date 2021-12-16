@@ -22,6 +22,9 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
+	@PostMapping("/profile")	//Pour afficher et Modifier dans la partie Profile
+	public User getProfile(@RequestBody int idUser) {return userService.findUserById(idUser);}
+
 	@GetMapping("/users")
 	public List<User> getUsers() {
 		return (List<User>) userRepository.findAll();

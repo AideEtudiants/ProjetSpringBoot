@@ -16,7 +16,12 @@ public class ProductController {
 	private ProductService productService;
 	@Autowired
 	private CartService cartService;
-  
+
+	@PostMapping(value="/listProductByUser")
+	public List<Product> listProductByUser(@RequestBody int id){
+		return productService.listProductByUser(id);
+	}
+
 	@GetMapping(value="/all")
 	public List<Product> getAllProducts() {
 		return productService.getProducts();

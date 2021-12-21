@@ -59,7 +59,8 @@ public class ProductController {
 	}
 
 	@GetMapping(value="/test")
-	public boolean test() {
+	public
+	List<Product>test() {
 		Product product = new Product();
 		product.setName("Clavier");
 		product.setImage("image");
@@ -69,6 +70,6 @@ public class ProductController {
 		product.setAvailability(2);
 		product.setPrice(100.0);
 		product.setQuantity(3);
-		return productService.createProduct(product);
+		return productService.listProductByUser(4);
 	}
 }

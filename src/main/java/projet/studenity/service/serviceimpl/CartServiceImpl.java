@@ -5,10 +5,12 @@ import org.springframework.stereotype.Service;
 import projet.studenity.dao.CartDao;
 import projet.studenity.model.Cart;
 import projet.studenity.model.Product;
+import projet.studenity.model.User;
 import projet.studenity.repository.CartRepository;
 import projet.studenity.repository.ProductRepository;
 import projet.studenity.service.CartService;
 import projet.studenity.service.ProductService;
+import projet.studenity.service.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +19,10 @@ import java.util.List;
 public class CartServiceImpl implements CartService {
     @Autowired
     CartRepository cartRepo;
+
+    @Autowired
+    UserService userService;
+
     @Autowired
     ProductRepository productRepo;
     @Autowired
@@ -48,24 +54,16 @@ public class CartServiceImpl implements CartService {
         try {
             List<Cart> listCart = cartRepo.findAll();
             Product product = productService.findProductById(cart.getIdProduct());
-            //S'il exist deja idUser + idProduit dans Cart, mets a jours la quantite
-            for(Cart c: listCart){
-                if(c.getIdUser() == cart.getIdUser() && c.getIdProduct()==cart.getIdProduct()){
-                    c.setQuantity(c.getQuantity()+1);
-                    cartDao.updateCart(c);
-                    if (product.getQuantity()==0){return false;}
-                    product.setQuantity(product.getQuantity()-1);
-                    if(product.getQuantity()==0) {product.setAvailability(3);} //Passer la disponibilite a Reserve
-                    productService.updateProduct(product);
-                    return true;
-                }
+            User user = userService.findUserById(cart.getIdUser());
+            //check Point user
+            if(user.getPoint() < product.getPoint()){
+                return false;
             }
-            //chercher le produit de cette utilisateur
-            if (product.getQuantity()==0){return false;}
-            product.setQuantity(product.getQuantity()-1);
-            if(product.getQuantity()==0) {product.setAvailability(3);} //Passer la disponibilite a Reserve
+            if(product.getAvailability() != 1) {return false;} //S'il est pas disponible, return false
+            user.setPoint(user.getPoint()-product.getPoint());
+            userService.updateUser(user);
+            product.setAvailability(3);
             productService.updateProduct(product);
-            cart.setQuantity(1);
             cartRepo.save(cart);
         }catch(Exception e){
             return false;
@@ -76,18 +74,19 @@ public class CartServiceImpl implements CartService {
     @Override
     public boolean deleteFromCart(Cart cart) {
         try {
-            //chercher le produit de cette utilisateur
+            Product product = productService.findProductById(cart.getIdProduct());
+            User user = userService.findUserById(cart.getIdUser());
+            if(product.getAvailability()!=1) product.setAvailability(1); //Passer la disponibilite a Available
+            user.setPoint(user.getPoint()+product.getPoint());
+            userService.updateUser(user);
+            productService.updateProduct(product);
             List<Cart> cartList = cartRepo.findAll();
             for(Cart c: cartList){
+                //Find ID CART pour supprimer
                 if(c.getIdUser()==cart.getIdUser() && c.getIdProduct()==c.getIdProduct()){
                     cart.setId(c.getId());
-                    cart.setQuantity(c.getQuantity());
                 }
             }
-            Product product = productService.findProductById(cart.getIdProduct());
-            if(product.getAvailability()!=1) product.setAvailability(1); //Passer la disponibilite a Available
-            product.setQuantity(product.getQuantity()+cart.getQuantity()); //Retour quantite a product
-            productService.updateProduct(product);
             cartRepo.delete(cart);
         }catch(Exception e){
             return false;
@@ -102,8 +101,11 @@ public class CartServiceImpl implements CartService {
             for (Cart cart : listCart) {
                 if (cart.getIdUser() == idUser) {
                     Product product = productService.findProductById(cart.getIdProduct()); //chercher le produit de cette utilisateur
-                    product.setAvailability(2); //Passer la disponibilite a Solde
+                    product.setAvailability(2); //Passer la disponibilite a Donnee
                     productService.updateProduct(product);
+                    // Augmente le point de l'utilisateur qui donne ce produit
+                    User user = userService.findUserById(product.getUserId());
+                    user.setPoint(user.getPoint()+product.getPoint());
                     cartRepo.delete(cart);
                 }
             }
@@ -116,12 +118,14 @@ public class CartServiceImpl implements CartService {
     @Override
     public boolean deleteAllFromCart(int idUser) {
         List<Cart> listCart = cartRepo.findAll();
+        User user = userService.findUserById(idUser);
         try {
             for (Cart cart : listCart) {
                 if (cart.getIdUser() == idUser) {
                     Product product = productService.findProductById(cart.getIdProduct());
                     product.setAvailability(1); //Passer la disponibilite a Available
-                    product.setQuantity(product.getQuantity()+cart.getQuantity());
+                    user.setPoint(user.getPoint()+product.getPoint());
+                    userService.updateUser(user);
                     productService.updateProduct(product);
                     cartRepo.delete(cart);
                 }
@@ -133,20 +137,20 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public Double totalPrice(int idUser) {
+    public Integer totalPoint(int idUser) {
         List<Cart> listCart = cartRepo.findAll();
-        Double price=0.0;
+        int point=0;
         try {
             for (Cart cart : listCart) {
                 if (cart.getIdUser() == idUser) {
                     //chercher le produit de cette utilisateur
                     Product product = productService.findProductById(cart.getIdProduct());
-                    price +=product.getPrice();
+                    point +=product.getPoint();
                 }
             }
         }catch(Exception e){
             return null;
         }
-        return price;
+        return point;
     }
 }

@@ -26,6 +26,10 @@ public class User {
     @Column(name="certificate_regist")
     private String certificateRegist;
     private String photo;
+	private int point;
+	private String address;
+	@Column(name="POSTAL_CODE")
+	private int postalCode;
 
 	public int getId() {
 		return id;
@@ -107,14 +111,27 @@ public class User {
 		this.photo = photo;
 	}
 
-	@Override
-	public String toString() {
-		return "User [id_user=" + id + ", lastName=" + lastName + ", firstName=" + firstName + ", email=" + email
-				+ ", password=" + password + ", birthDate=" + birthDate + ", studyLevel=" + studyLevel
-				+ ", establishment=" + establishment + ", certificateRegist=" + certificateRegist + ", photo=" + photo
-				+ "]";
+	public int getPoint() {
+		return point;
 	}
-	
-	
-    
+
+	public void setPoint(int point) {
+		this.point = point;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public int getPostalCode() {
+		return postalCode;
+	}
+
+	public void setPostalCode(int postalCode) {
+		this.postalCode = postalCode;
+	}
 }

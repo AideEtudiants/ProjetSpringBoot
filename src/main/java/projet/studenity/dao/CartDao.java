@@ -21,11 +21,10 @@ public class CartDao {
 
     @Transactional
     public void updateCart(Cart cart){
-        entityManager.createNativeQuery("UPDATE cart SET id_user=?, id_product=?, quantity=? WHERE id_cart=?")
+        entityManager.createNativeQuery("UPDATE cart SET id_user=?, id_product=? WHERE id_cart=?")
                 .setParameter(1, cart.getIdUser())
                 .setParameter(2, cart.getIdProduct())
-                .setParameter(3, cart.getQuantity())
-                .setParameter(4, cart.getId())
+                .setParameter(3, cart.getId())
                 .executeUpdate();
     }
 }

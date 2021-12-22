@@ -32,6 +32,8 @@ public class ClassServiceImpl implements ClassService {
 
     @Override
     public boolean addClass(Class c) {
+        c.setUserId(4); //Pour tester
+        c.setStartDate("05/01/2022");
         classRepo.save(c);
         return true;
     }
@@ -62,6 +64,12 @@ public class ClassServiceImpl implements ClassService {
 
     @Override
     public boolean addUserToClass(ClassUser classUser) {
+        List<ClassUser> classUsers = classUserRepo.findAll();
+        for(ClassUser cU: classUsers){
+            if(cU.getClassId() == classUser.getClassId() && cU.getUserId()==classUser.getUserId()){
+                return false;
+            }
+        }
         classUserRepo.save(classUser);
         return true;
     }

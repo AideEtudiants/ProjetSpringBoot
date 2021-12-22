@@ -34,8 +34,8 @@ public class CartController {
     public boolean deleteAll(@RequestBody int idUser){return cartService.deleteAllFromCart(idUser);}
 
     @PostMapping(value="/totalPrice")
-    public Double totalPrice(@RequestBody int idUser){
-        return cartService.totalPrice(idUser);
+    public int totalPoint(@RequestBody int idUser){
+        return cartService.totalPoint(idUser);
     }
 
     @PostMapping(value="/list")
@@ -46,9 +46,9 @@ public class CartController {
     @GetMapping(value="/test")
     public boolean test() {
         Cart cart = new Cart();
-        cart.setIdUser(5);
-        cart.setIdProduct(115);
-        cart.setQuantity(4);
-        return cartService.deleteFromCart(cart);
+        cart.setIdUser(4);
+        cart.setIdProduct(220);
+        return cartService.payCart(cart.getIdUser());
+
     }
 }

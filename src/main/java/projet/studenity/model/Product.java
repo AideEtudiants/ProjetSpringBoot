@@ -16,7 +16,7 @@ public class Product {
     @Column(name="id_product")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-	private Double price;
+	private int point;
 	private String name;
 	private String image;
     private String description;
@@ -28,13 +28,15 @@ public class Product {
 	private int availability;
 	@Column(name="id_user")
 	private int userId;
-	private int quantity;
+	@Column(name="start_date")
+	private Date startDate;
 
-	public Double getPrice() {
-		return price;
+
+	public int getPoint() {
+		return point;
 	}
-	public void setPrice(Double price) {
-		this.price = price;
+	public void setPoint(int point) {
+		this.point = point;
 	}
 	public int getId() {
 		return id;
@@ -78,12 +80,6 @@ public class Product {
 	public void setAvailability(int availability) {
 		this.availability = availability;
 	}
-	public int getQuantity() {
-		return quantity;
-	}
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
 
 	public int getUserId() {
 		return userId;
@@ -93,18 +89,11 @@ public class Product {
 		this.userId = userId;
 	}
 
-	@Override
-	public String toString() {
-		return "Product{" +
-				"id=" + id +
-				", name='" + name + '\'' +
-				", image='" + image + '\'' +
-				", description='" + description + '\'' +
-				", statusCode=" + statusCode +
-				", categoryCode=" + categoryCode +
-				", availability='" + availability + '\'' +
-				", price='" + price + '\'' +
-				", quantity='" + quantity + '\'' +
-				'}';
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
 	}
 }

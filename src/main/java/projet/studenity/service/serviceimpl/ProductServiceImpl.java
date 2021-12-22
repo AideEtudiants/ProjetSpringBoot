@@ -84,6 +84,9 @@ public class ProductServiceImpl implements ProductService {
         try {
             product.setUserId(4); //Pour tester, a faire en Front
             product.setAvailability(1);
+            if(product.getCategoryCode()==1) product.setPoint(2); // si livre => 2 pts
+            else if(product.getCategoryCode()==2) product.setPoint(3); // si equipements => 3 pts
+            else if (product.getCategoryCode()==3) product.setPoint(1); // si autre => 1 pts
             productRepo.save(product);
         }catch (Exception e){
             return false;

@@ -13,7 +13,6 @@ public class Cart {
     private int idUser;
     @Column(name="id_Product")
     private int idProduct;
-    private int quantity;
 
     public int getId() {
         return id;
@@ -37,13 +36,5 @@ public class Cart {
 
     public void setIdProduct(int idProduct) {
         this.idProduct = idProduct;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
     }
 }

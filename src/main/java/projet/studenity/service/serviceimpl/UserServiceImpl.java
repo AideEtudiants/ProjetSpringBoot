@@ -57,7 +57,7 @@ public class UserServiceImpl implements UserService {
     public boolean createUser(User user) {
         List<User> userList = userRepo.findAll();
         for(User userTemp : userList){
-            if(userTemp.getEmail()==user.getEmail()){
+            if(userTemp.getEmail().equalsIgnoreCase(user.getEmail())){
                 return false;
             }
         }
@@ -68,7 +68,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean updateUser(User user) {
         try {
-            userDao.updateUser(user);
+            userRepo.save(user);
         }catch(Exception e){return false;}
         return true;
     }

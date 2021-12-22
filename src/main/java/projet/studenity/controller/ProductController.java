@@ -68,8 +68,6 @@ public class ProductController {
 		product.setStatusCode(1);
 		product.setCategoryCode(2);
 		product.setAvailability(2);
-		product.setPrice(100.0);
-		product.setQuantity(3);
 		return productService.listProductByUser(4);
 	}
 }

@@ -12,6 +12,7 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping(value="/class")
 public class ClassController {
+
     @Autowired
     private ClassService classService;
 
@@ -49,12 +50,13 @@ public class ClassController {
     }
 
     @GetMapping(value="/test")
-    public boolean test() {
+    public
+    List<Class> test() {
         Class classes = new Class();
         classes.setId(1);
         classes.setStartDate("15/12/2021");
         classes.setDescription("Examen prepare");
         classes.setName("Programmation Concurrente");
-        return classService.updateClass(classes);
+        return classService.listClassByUser(4);
     }
 }

@@ -15,7 +15,7 @@ import java.util.List;
 @Service
 public class ForumAnswerServiceImpl implements ForumAnswerService {
     @Autowired
-    ForumRepository forumRepo;
+    private ForumRepository forumRepo;
 
     @Autowired
     AnswerRepository answerRepo;
@@ -103,13 +103,8 @@ public class ForumAnswerServiceImpl implements ForumAnswerService {
     }
 
     @Override
-    public List<Forum> listForum() {
-        try {
-             List<Forum> forums = forumRepo.findAll();
-             return forums;
-        }catch(Exception e){
-            return null;
-        }
+    public List<Forum> getAllForums() {
+        return forumRepo.findAll();
     }
 
     @Override

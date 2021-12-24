@@ -16,6 +16,6 @@ public interface ForumAnswerService {
     boolean deleteAnswer(Answer answer);
     boolean updateForum(Forum forum);
     boolean updateAnswer(Answer answer);
-    List<Forum> listForum();
+    List<Forum> getAllForums();
     List<Answer> listAnswerByForum(int idForum);
 }

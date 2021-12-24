@@ -45,8 +45,8 @@ public class ForumAnswerController {
     }
 
     @GetMapping(value="/listForum")
-    public List<Forum> listClass(){
-        return forumAnswerService.listForum();
+    public List<Forum> getAllForums(){
+        return forumAnswerService.getAllForums();
     }
 
     @PostMapping(value="/listAnswerByForum")

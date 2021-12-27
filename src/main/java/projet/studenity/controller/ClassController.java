@@ -16,6 +16,11 @@ public class ClassController {
     @Autowired
     private ClassService classService;
 
+    @PostMapping(value="/classById")
+    public Class listClassById(@RequestBody int idClass){
+        return classService.findClassById(idClass);
+    }
+
     @PostMapping(value="/listClassByUser")
     public List<Class> listClassByUser(@RequestBody int idUser){
         return classService.listClassByUser(idUser);

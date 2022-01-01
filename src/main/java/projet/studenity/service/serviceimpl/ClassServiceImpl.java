@@ -9,6 +9,7 @@ import projet.studenity.repository.ClassUserRepository;
 import projet.studenity.service.ClassService;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -33,7 +34,10 @@ public class ClassServiceImpl implements ClassService {
     @Override
     public boolean addClass(Class c) {
         c.setUserId(4); //Pour tester
-        c.setStartDate("05/01/2022");
+        //Set Current Date
+        long millis=System.currentTimeMillis();
+        java.sql.Date date=new java.sql.Date(millis);
+        c.setStartDate(date);
         classRepo.save(c);
         return true;
     }
@@ -86,12 +90,19 @@ public class ClassServiceImpl implements ClassService {
     @Override
     public List<Class> listClassByUser(int idUser) {
         List<ClassUser> classUsers = classUserRepo.findAll();
+        List<Class> listClasses = classRepo.findAll();
         List<Class> classes = new ArrayList<>();
         for(ClassUser classUser: classUsers){
             if(classUser.getUserId() == idUser){
                 classes.add(findClassById(classUser.getClassId()));
             }
         }
+        for(Class c:listClasses){
+            if(c.getUserId()==idUser){
+                classes.add(c);
+            }
+        }
+
         if(classes.isEmpty()) return null;
         return classes;
     }

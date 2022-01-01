@@ -6,6 +6,8 @@ import projet.studenity.model.Class;
 import projet.studenity.model.ClassUser;
 import projet.studenity.service.ClassService;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -16,17 +18,12 @@ public class ClassController {
     @Autowired
     private ClassService classService;
 
-    @PostMapping(value="/classById")
-    public Class listClassById(@RequestBody int idClass){
-        return classService.findClassById(idClass);
-    }
-
     @PostMapping(value="/listClassByUser")
     public List<Class> listClassByUser(@RequestBody int idUser){
         return classService.listClassByUser(idUser);
     }
 
-    @PostMapping(value="/delete")
+    @PostMapping(value="/deleteUserFromClass")
     public boolean deleteUserFromClass(@RequestBody ClassUser classUser){
         return classService.deleteUserFromClass(classUser);
     }
@@ -47,7 +44,8 @@ public class ClassController {
     }
 
     @PostMapping(value="/deleteClass")
-    public boolean deleteClass(@RequestBody int idClass){return classService.deleteClass(idClass);}
+    public boolean deleteClass(@RequestBody int idClass){
+        return classService.deleteClass(idClass);}
 
     @GetMapping(value="/list")
     public List<Class> listClass(){
@@ -58,10 +56,8 @@ public class ClassController {
     public
     List<Class> test() {
         Class classes = new Class();
-        classes.setId(1);
-        classes.setStartDate("15/12/2021");
-        classes.setDescription("Examen prepare");
-        classes.setName("Programmation Concurrente");
+        classes.setDescription("CC prepare");
+        classes.setName("Gestion de projet");
         return classService.listClassByUser(4);
     }
 }

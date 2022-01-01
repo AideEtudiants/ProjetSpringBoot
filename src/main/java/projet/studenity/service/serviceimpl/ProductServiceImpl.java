@@ -10,7 +10,11 @@ import projet.studenity.repository.ProductRepository;
 import projet.studenity.repository.UserRepository;
 import projet.studenity.service.ProductService;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -79,11 +83,70 @@ public class ProductServiceImpl implements ProductService {
         return productByUser;
     }
 
+    //A tester
+    @Override
+    public List<Product> findProductByFilter(int idCategory, int statusCode, int availability, int startDate) throws ParseException {
+        List<Product> products = productRepo.findAll();
+        List<Product> listProduct = new ArrayList<>();
+        List<Product> listCategory = new ArrayList<>();
+        List<Product> listStatus = new ArrayList<>();
+        List<Product> listAvailability = new ArrayList<>();
+        List<Product> listDate = new ArrayList<>();
+        Date dateCurrent = new Date();
+
+        if (idCategory != 0) {
+            for (Product product : products) {
+                if (product.getCategoryCode() == idCategory) {
+                    listCategory.add(product);
+                }
+            }
+        } else if (idCategory == 0) {
+            listCategory.addAll(products);
+        } else if (statusCode != 0) {
+            for (Product p : listCategory) {
+                if (p.getStatusCode() == statusCode) {
+                    listStatus.add(p);
+                }
+            }
+        } else if (statusCode == 0) {
+            listStatus.addAll(listCategory);
+        } else if (availability != 0) {
+            for (Product p : listStatus) {
+                if (p.getStatusCode() == statusCode) {
+                    listAvailability.add(p);
+                }
+            }
+        } else if (availability == 0) {
+            listAvailability.addAll(listStatus);
+        }
+//            else if(startDate!=0){
+//                for(Product p: listCategory) {
+//                    if(startDate==1){
+//                        if(p.getStartDate().compareTo(dateCurrent)==0){
+//                            listDate.add(p);
+//                    }
+//                    if (startDate==2) {
+//                        if(p.getStartDate().)
+//                        listStatus.add(p);
+//                    }
+//                }
+//            }
+//            else if(startDate==0) {
+//                listStatus.addAll(listCategory);
+//            }
+        listProduct.addAll(listAvailability);
+        return listProduct;
+    }
+
     @Override
     public boolean createProduct(Product product) {
         try {
             product.setUserId(4); //Pour tester, a faire en Front
             product.setAvailability(1);
+            //Set Current Date
+            long millis=System.currentTimeMillis();
+            java.sql.Date date=new java.sql.Date(millis);
+            product.setStartDate(date);
             if(product.getCategoryCode()==1) product.setPoint(2); // si livre => 2 pts
             else if(product.getCategoryCode()==2) product.setPoint(3); // si equipements => 3 pts
             else if (product.getCategoryCode()==3) product.setPoint(1); // si autre => 1 pts

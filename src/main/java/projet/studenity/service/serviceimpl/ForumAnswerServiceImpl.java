@@ -3,13 +3,13 @@ package projet.studenity.service.serviceimpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import projet.studenity.model.Answer;
-import projet.studenity.model.ClassUser;
 import projet.studenity.model.Forum;
 import projet.studenity.repository.AnswerRepository;
 import projet.studenity.repository.ForumRepository;
 import projet.studenity.service.ForumAnswerService;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -45,6 +45,9 @@ public class ForumAnswerServiceImpl implements ForumAnswerService {
     @Override
     public boolean addForum(Forum forum) {
         try {
+            long millis=System.currentTimeMillis();
+            java.sql.Date date=new java.sql.Date(millis);
+            forum.setStartDate(date);
             forumRepo.save(forum);
         }catch (Exception e){
             return false;
@@ -55,6 +58,9 @@ public class ForumAnswerServiceImpl implements ForumAnswerService {
     @Override
     public boolean addAnswerToForum(Answer answer) {
         try {
+            long millis=System.currentTimeMillis();
+            java.sql.Date date=new java.sql.Date(millis);
+            answer.setStartDate(date);
             answerRepo.save(answer);
         }catch (Exception e){
             return false;

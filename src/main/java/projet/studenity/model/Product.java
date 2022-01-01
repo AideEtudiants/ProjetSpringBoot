@@ -29,7 +29,7 @@ public class Product {
 	@Column(name="id_user")
 	private int userId;
 	@Column(name="start_date")
-	private Date startDate;
+	private java.sql.Date startDate;
 
 
 	public int getPoint() {
@@ -89,11 +89,11 @@ public class Product {
 		this.userId = userId;
 	}
 
-	public Date getStartDate() {
+	public java.sql.Date getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(Date startDate) {
+	public void setStartDate(java.sql.Date startDate) {
 		this.startDate = startDate;
 	}
 }

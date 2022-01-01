@@ -93,7 +93,7 @@ public class UserDao {
       	user.setFirstName(rs.getString("first_name"));
       	user.setLastName(rs.getString("last_name"));
       	user.setEmail(rs.getString("Email"));
-      	user.setBirthDate(rs.getString("birth_date"));
+      	user.setBirthDate(rs.getDate("birth_date"));
       	user.setStudyLevel(rs.getString("study_level"));
       	user.setEstablishment(rs.getString("establishment"));
       	user.setPassword(rs.getString("password"));

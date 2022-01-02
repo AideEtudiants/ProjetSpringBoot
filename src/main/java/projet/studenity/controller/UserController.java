@@ -9,6 +9,10 @@ import projet.studenity.repository.UserRepository;
 import projet.studenity.service.UserService;
 
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -52,8 +56,10 @@ public class UserController {
 		return listUser.toString();
 	}
 
-	@GetMapping(value="/tests")
-	public void test() {
+	@GetMapping(value="/test")
+	public void test() throws ParseException {
+		String stringDate = "22/01/2000";
+		Date date1 = new SimpleDateFormat("dd/MM/yyyy").parse(stringDate);
 		User user = new User();
 		user.setLastName("test");
 		user.setEmail("le@");
@@ -63,6 +69,9 @@ public class UserController {
 		user.setPassword("a");
 		user.setStudyLevel("a");
 		user.setPhoto("a");
+		user.setAddress("1 place de bastile");
+		user.setBirthDate(new java.sql.Date(1997,12,1));
+		user.setPoint(5);
 
 		userRepository.save(user);
 	}

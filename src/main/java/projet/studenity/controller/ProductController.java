@@ -1,5 +1,7 @@
 package projet.studenity.controller;
 
+import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,9 +60,14 @@ public class ProductController {
 		return productService.findProductByCategory(idCategory);
 	}
 
+	@GetMapping(value="/search/{idC}/{idS}/{idA}/{date}")
+	public List<Product> filterProduct(@PathVariable("idC") int idCategory, @PathVariable("idS") int idStatus, @PathVariable("idA") int availability, @PathVariable("date") int startDate) throws ParseException {
+		return productService.findProductByFilter(idCategory,idStatus,availability,startDate);
+	}
+
 	@GetMapping(value="/test")
 	public
-	List<Product>test() {
+	void test() {
 		Product product = new Product();
 		product.setName("Clavier");
 		product.setImage("image");
@@ -68,6 +75,6 @@ public class ProductController {
 		product.setStatusCode(1);
 		product.setCategoryCode(2);
 		product.setAvailability(2);
-		return productService.listProductByUser(4);
+		productService.createProduct(product);
 	}
 }

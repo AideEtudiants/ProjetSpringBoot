@@ -19,7 +19,7 @@ public class User {
     private String email;
     private String 	password;
     @Column(name="birth_date")
-    private String birthDate;
+    private java.sql.Date birthDate;
     @Column(name="study_level")
     private String studyLevel;
     private String establishment;
@@ -71,11 +71,11 @@ public class User {
 		this.password = password;
 	}
 
-	public String getBirthDate() {
+	public java.sql.Date getBirthDate() {
 		return birthDate;
 	}
 
-	public void setBirthDate(String birthDate) {
+	public void setBirthDate(java.sql.Date birthDate) {
 		this.birthDate = birthDate;
 	}
 
@@ -133,5 +133,24 @@ public class User {
 
 	public void setPostalCode(int postalCode) {
 		this.postalCode = postalCode;
+	}
+
+	@Override
+	public String toString() {
+		return "User{" +
+				"id=" + id +
+				", lastName='" + lastName + '\'' +
+				", firstName='" + firstName + '\'' +
+				", email='" + email + '\'' +
+				", password='" + password + '\'' +
+				", birthDate='" + birthDate + '\'' +
+				", studyLevel='" + studyLevel + '\'' +
+				", establishment='" + establishment + '\'' +
+				", certificateRegist='" + certificateRegist + '\'' +
+				", photo='" + photo + '\'' +
+				", point=" + point +
+				", address='" + address + '\'' +
+				", postalCode=" + postalCode +
+				'}';
 	}
 }

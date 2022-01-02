@@ -1,6 +1,7 @@
 package projet.studenity.model;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name="CLASS")
@@ -12,7 +13,7 @@ public class Class {
     private String name;
     private String description;
     @Column(name="start_date")
-    private String startDate;
+    private java.sql.Date startDate;
     @Column(name="id_user")
     private int userId;
 
@@ -40,11 +41,11 @@ public class Class {
         this.description = description;
     }
 
-    public String getStartDate() {
+    public java.sql.Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(String startDate) {
+    public void setStartDate(java.sql.Date startDate) {
         this.startDate = startDate;
     }
 

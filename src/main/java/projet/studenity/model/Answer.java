@@ -16,7 +16,7 @@ public class Answer {
     private int idForum;
     private String answer;
     @Column(name="start_date")
-    private Date startDate;
+    private java.sql.Date startDate;
 
     public int getId() {
         return id;
@@ -50,11 +50,11 @@ public class Answer {
         this.answer = answer;
     }
 
-    public Date getStartDate() {
+    public java.sql.Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(java.sql.Date startDate) {
         this.startDate = startDate;
     }
 }

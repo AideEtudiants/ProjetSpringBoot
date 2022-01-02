@@ -54,9 +54,9 @@ public class ForumAnswerController {
         return forumAnswerService.listAnswerByForum(idForum);
     }
 
-    @GetMapping(value="/test")
+    /*@GetMapping(value="/test")
     public List<Forum> test() {
 
         return forumAnswerService.getAllForums();
-    }
+    }*/
 }

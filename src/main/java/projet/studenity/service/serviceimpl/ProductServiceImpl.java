@@ -100,23 +100,28 @@ public class ProductServiceImpl implements ProductService {
                     listCategory.add(product);
                 }
             }
-        } else if (idCategory == 0) {
+        }
+        if (idCategory == 0) {
             listCategory.addAll(products);
-        } else if (statusCode != 0) {
+        }
+        if (statusCode != 0) {
             for (Product p : listCategory) {
                 if (p.getStatusCode() == statusCode) {
                     listStatus.add(p);
                 }
             }
-        } else if (statusCode == 0) {
+        }
+        if (statusCode == 0) {
             listStatus.addAll(listCategory);
-        } else if (availability != 0) {
+        }
+        if (availability != 0) {
             for (Product p : listStatus) {
-                if (p.getStatusCode() == statusCode) {
+                if (p.getAvailability() == availability) {
                     listAvailability.add(p);
                 }
             }
-        } else if (availability == 0) {
+        }
+        if (availability == 0) {
             listAvailability.addAll(listStatus);
         }
 //            else if(startDate!=0){

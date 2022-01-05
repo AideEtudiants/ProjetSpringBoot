@@ -109,7 +109,7 @@ public class ForumAnswerServiceImpl implements ForumAnswerService {
     }
 
     @Override
-    public List<Forum> getForums() {
+    public List<Forum> getAllForums() {
         return forumRepo.findAll();
     }
 

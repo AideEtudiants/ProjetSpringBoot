@@ -44,15 +44,20 @@ public class ForumAnswerController {
         return forumAnswerService.updateAnswer(answer);
     }
 
-    @GetMapping(value="/listForum")
+    @GetMapping(value="/list")
     public List<Forum> getAllForums(){
         return forumAnswerService.getAllForums();
     }
 
     @PostMapping(value="/listAnswerByForum")
-    public List<Answer> listAnswerByForum(@RequestBody int idForum){
+    public List<Answer> listAnswerByForum(@RequestBody int idForum) {
         return forumAnswerService.listAnswerByForum(idForum);
     }
+    @GetMapping(value="/{idForum}")
+    public Forum findForumById(@PathVariable("idForum")  int idForum) {
+        return forumAnswerService.findForumById(idForum);
+    }
+
 
     /*@GetMapping(value="/test")
     public List<Forum> test() {

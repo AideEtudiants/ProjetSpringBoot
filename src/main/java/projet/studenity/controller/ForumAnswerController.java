@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping(value="/forum")
+@RequestMapping(value="/question")
 public class ForumAnswerController {
     @Autowired
     private ForumAnswerService forumAnswerService;
@@ -46,7 +46,7 @@ public class ForumAnswerController {
 
     @GetMapping(value="/listForum")
     public List<Forum> getAllForums(){
-        return forumAnswerService.getAllForums();
+        return forumAnswerService.getForums();
     }
 
     @PostMapping(value="/listAnswerByForum")
@@ -54,9 +54,9 @@ public class ForumAnswerController {
         return forumAnswerService.listAnswerByForum(idForum);
     }
 
-    @GetMapping(value="/test")
+    /*@GetMapping(value="/test")
     public List<Forum> test() {
 
         return forumAnswerService.getAllForums();
-    }
+    }*/
 }

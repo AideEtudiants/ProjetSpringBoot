@@ -1,8 +1,6 @@
 package projet.studenity.service;
 
 import projet.studenity.model.Answer;
-import projet.studenity.model.Class;
-import projet.studenity.model.ClassUser;
 import projet.studenity.model.Forum;
 
 import java.util.List;
@@ -16,6 +14,6 @@ public interface ForumAnswerService {
     boolean deleteAnswer(Answer answer);
     boolean updateForum(Forum forum);
     boolean updateAnswer(Answer answer);
-    List<Forum> getAllForums();
+    public abstract List<Forum> getForums();
     List<Answer> listAnswerByForum(int idForum);
 }

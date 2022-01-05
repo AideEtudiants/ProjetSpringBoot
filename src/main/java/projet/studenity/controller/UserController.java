@@ -71,7 +71,6 @@ public class UserController {
 		user.setPhoto("a");
 		user.setAddress("1 place de bastile");
 		user.setBirthDate(new java.sql.Date(1997,12,1));
-		user.setPoint(5);
 
 		userRepository.save(user);
 	}

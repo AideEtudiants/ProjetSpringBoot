@@ -52,6 +52,9 @@ public class ClassController {
         return classService.listClass();
     }
 
+    @PostMapping(value="/participant")
+    public int participant(@RequestBody int idClass){return classService.participant(idClass);}
+
     @GetMapping(value="/test")
     public
     List<Class> test() {

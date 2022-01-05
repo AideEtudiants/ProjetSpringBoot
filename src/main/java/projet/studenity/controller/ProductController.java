@@ -67,14 +67,15 @@ public class ProductController {
 
 	@GetMapping(value="/test")
 	public
-	void test() {
-		Product product = new Product();
-		product.setName("Clavier");
-		product.setImage("image");
-		product.setDescription("description");
-		product.setStatusCode(1);
-		product.setCategoryCode(2);
-		product.setAvailability(2);
-		productService.createProduct(product);
+	List<Product> test() {
+//		Product product = new Product();
+//		product.setName("Clavier");
+//		product.setImage("image");
+//		product.setDescription("description");
+//		product.setStatusCode(1);
+//		product.setCategoryCode(2);
+//		product.setAvailability(2);
+//		productService.createProduct(product);
+		return productService.getProducts();
 	}
 }

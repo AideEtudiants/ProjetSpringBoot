@@ -34,8 +34,8 @@ public class CartController {
     public boolean deleteAll(@RequestBody int idUser){return cartService.deleteAllFromCart(idUser);}
 
     @PostMapping(value="/totalPrice")
-    public int totalPoint(@RequestBody int idUser){
-        return cartService.totalPoint(idUser);
+    public int totalPrice(@RequestBody int idUser){
+        return cartService.totalPrice(idUser);
     }
 
     @PostMapping(value="/list")

@@ -44,7 +44,7 @@ public class UserDao {
 	public void updateUser(User user){
 		entityManager.createNativeQuery("UPDATE user SET first_name=?, last_name=?," +
 						" email=?, birth_date=?, study_level=?, establishment=?, certificate_regist=?, " +
-						"photo=?, password=?, point=?, address=?, postal_code=? WHERE id_user=?")
+						"photo=?, password=?, address=?, postal_code=? WHERE id_user=?")
 				.setParameter(1, user.getFirstName())
 				.setParameter(2, user.getLastName())
 				.setParameter(3, user.getEmail())
@@ -54,10 +54,9 @@ public class UserDao {
 				.setParameter(7, user.getCertificateRegist())
 				.setParameter(8, user.getPhoto())
 				.setParameter(9, user.getPassword())
-				.setParameter(10, user.getPoint())
-				.setParameter(11, user.getAddress())
-				.setParameter(12, user.getPostalCode())
-				.setParameter(13, user.getId())
+				.setParameter(10, user.getAddress())
+				.setParameter(11, user.getPostalCode())
+				.setParameter(12, user.getId())
 				.executeUpdate();
 	}
 

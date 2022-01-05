@@ -1,8 +1,6 @@
 package projet.studenity.model;
 
 import javax.persistence.*;
-import java.util.Date;
-
 
 @Entity
 @Table(name = "USERS")
@@ -26,7 +24,6 @@ public class User {
     @Column(name="certificate_regist")
     private String certificateRegist;
     private String photo;
-	private int point;
 	private String address;
 	@Column(name="POSTAL_CODE")
 	private int postalCode;
@@ -111,14 +108,6 @@ public class User {
 		this.photo = photo;
 	}
 
-	public int getPoint() {
-		return point;
-	}
-
-	public void setPoint(int point) {
-		this.point = point;
-	}
-
 	public String getAddress() {
 		return address;
 	}
@@ -148,7 +137,6 @@ public class User {
 				", establishment='" + establishment + '\'' +
 				", certificateRegist='" + certificateRegist + '\'' +
 				", photo='" + photo + '\'' +
-				", point=" + point +
 				", address='" + address + '\'' +
 				", postalCode=" + postalCode +
 				'}';

@@ -60,6 +60,7 @@ public class ClassServiceImpl implements ClassService {
         return true;
     }
 
+
     @Override
     public boolean updateClass(Class c) {
         classRepo.save(c);
@@ -105,5 +106,17 @@ public class ClassServiceImpl implements ClassService {
 
         if(classes.isEmpty()) return null;
         return classes;
+    }
+
+    @Override
+    public int participant(int idClass) {
+        int count=0;
+        List<ClassUser> classes = classUserRepo.findAll();
+        for(ClassUser classUser: classes){
+            if(classUser.getClassId() == idClass){
+                count++;
+            }
+        }
+        return count;
     }
 }

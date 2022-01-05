@@ -54,14 +54,8 @@ public class CartServiceImpl implements CartService {
         try {
             List<Cart> listCart = cartRepo.findAll();
             Product product = productService.findProductById(cart.getIdProduct());
-            User user = userService.findUserById(cart.getIdUser());
-            //check Point user
-            if(user.getPoint() < product.getPoint()){
-                return false;
-            }
-            if(product.getAvailability() != 1) {return false;} //S'il est pas disponible, return false
-            user.setPoint(user.getPoint()-product.getPoint());
-            userService.updateUser(user);
+            //S'il est pas disponible, return false
+            if(product.getAvailability() != 1) {return false;}
             product.setAvailability(3);
             productService.updateProduct(product);
             cartRepo.save(cart);
@@ -77,8 +71,6 @@ public class CartServiceImpl implements CartService {
             Product product = productService.findProductById(cart.getIdProduct());
             User user = userService.findUserById(cart.getIdUser());
             if(product.getAvailability()!=1) product.setAvailability(1); //Passer la disponibilite a Available
-            user.setPoint(user.getPoint()+product.getPoint());
-            userService.updateUser(user);
             productService.updateProduct(product);
             List<Cart> cartList = cartRepo.findAll();
             for(Cart c: cartList){
@@ -101,11 +93,8 @@ public class CartServiceImpl implements CartService {
             for (Cart cart : listCart) {
                 if (cart.getIdUser() == idUser) {
                     Product product = productService.findProductById(cart.getIdProduct()); //chercher le produit de cette utilisateur
-                    product.setAvailability(2); //Passer la disponibilite a Donnee
+                    product.setAvailability(2); //Passer la disponibilite a Unavailable
                     productService.updateProduct(product);
-                    // Augmente le point de l'utilisateur qui donne ce produit
-                    User user = userService.findUserById(product.getUserId());
-                    user.setPoint(user.getPoint()+product.getPoint());
                     cartRepo.delete(cart);
                 }
             }
@@ -124,8 +113,6 @@ public class CartServiceImpl implements CartService {
                 if (cart.getIdUser() == idUser) {
                     Product product = productService.findProductById(cart.getIdProduct());
                     product.setAvailability(1); //Passer la disponibilite a Available
-                    user.setPoint(user.getPoint()+product.getPoint());
-                    userService.updateUser(user);
                     productService.updateProduct(product);
                     cartRepo.delete(cart);
                 }
@@ -137,20 +124,20 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public Integer totalPoint(int idUser) {
+    public Integer totalPrice(int idUser) {
         List<Cart> listCart = cartRepo.findAll();
-        int point=0;
+        int price=0;
         try {
             for (Cart cart : listCart) {
                 if (cart.getIdUser() == idUser) {
                     //chercher le produit de cette utilisateur
                     Product product = productService.findProductById(cart.getIdProduct());
-                    point +=product.getPoint();
+                    price +=product.getPrice();
                 }
             }
         }catch(Exception e){
             return null;
         }
-        return point;
+        return price;
     }
 }

@@ -10,6 +10,6 @@ public interface CartService {
     public boolean deleteFromCart(Cart cart);
     public boolean payCart(int idUser);
     public boolean deleteAllFromCart(int idUser);
-    public Integer totalPoint(int idUser);
+    public Integer totalPrice(int idUser);
     public List<Product> listProduct(int idUser);
 }

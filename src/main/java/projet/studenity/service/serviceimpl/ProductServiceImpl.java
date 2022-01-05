@@ -124,7 +124,7 @@ public class ProductServiceImpl implements ProductService {
         if (availability == 0) {
             listAvailability.addAll(listStatus);
         }
-//            else if(startDate!=0){
+//              else if(startDate!=0){
 //                for(Product p: listCategory) {
 //                    if(startDate==1){
 //                        if(p.getStartDate().compareTo(dateCurrent)==0){
@@ -152,9 +152,9 @@ public class ProductServiceImpl implements ProductService {
             long millis=System.currentTimeMillis();
             java.sql.Date date=new java.sql.Date(millis);
             product.setStartDate(date);
-            if(product.getCategoryCode()==1) product.setPoint(2); // si livre => 2 pts
-            else if(product.getCategoryCode()==2) product.setPoint(3); // si equipements => 3 pts
-            else if (product.getCategoryCode()==3) product.setPoint(1); // si autre => 1 pts
+            if(product.getCategoryCode()==1) product.setPrice(2); // si livre => 2 pts
+            else if(product.getCategoryCode()==2) product.setPrice(3); // si equipements => 3 pts
+            else if (product.getCategoryCode()==3) product.setPrice(1); // si autre => 1 pts
             productRepo.save(product);
         }catch (Exception e){
             return false;

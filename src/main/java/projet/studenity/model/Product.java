@@ -16,7 +16,7 @@ public class Product {
     @Column(name="id_product")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-	private int point;
+	private int price;
 	private String name;
 	private String image;
     private String description;
@@ -32,11 +32,11 @@ public class Product {
 	private java.sql.Date startDate;
 
 
-	public int getPoint() {
-		return point;
+	public int getPrice() {
+		return price;
 	}
-	public void setPoint(int point) {
-		this.point = point;
+	public void setPrice(int price) {
+		this.price = price;
 	}
 	public int getId() {
 		return id;

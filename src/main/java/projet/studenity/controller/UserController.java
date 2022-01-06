@@ -38,12 +38,12 @@ public class UserController {
 	void addUser(@RequestBody User user) {
 		userService.createUser(user);
 	}
-	
-	@GetMapping(value="/test/{id}")
-	public String findNameUserById(@PathVariable("id") int id) {
-		return userService.findUserById(id).toString();
+
+	@PostMapping("/users/name")
+	String findNameUserById(@RequestBody int idUser) {
+		return userService.findUserById(idUser).getFirstName();
 	}
-	
+
 	@GetMapping(value="/count")
 	public int countUser() {
 		int count = userDao.getUserCount();

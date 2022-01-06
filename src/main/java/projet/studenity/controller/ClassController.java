@@ -23,6 +23,9 @@ public class ClassController {
         return classService.listClassByUser(idUser);
     }
 
+    @PostMapping(value="/classById")
+    public Class findClassById(@RequestBody int idClass){return classService.findClassById(idClass);}
+
     @PostMapping(value="/deleteUserFromClass")
     public boolean deleteUserFromClass(@RequestBody ClassUser classUser){
         return classService.deleteUserFromClass(classUser);

@@ -61,6 +61,7 @@ public class ForumAnswerServiceImpl implements ForumAnswerService {
             long millis=System.currentTimeMillis();
             java.sql.Date date=new java.sql.Date(millis);
             answer.setStartDate(date);
+            if(answer.getAnswer().equalsIgnoreCase("")){return false;}
             answerRepo.save(answer);
         }catch (Exception e){
             return false;

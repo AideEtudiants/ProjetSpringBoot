@@ -16,6 +16,7 @@ public class Class {
     private java.sql.Date startDate;
     @Column(name="id_user")
     private int userId;
+    private String address;
 
     public int getId() {
         return id;
@@ -55,5 +56,13 @@ public class Class {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

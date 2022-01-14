@@ -4,9 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import projet.studenity.model.Class;
 import projet.studenity.model.ClassUser;
+import projet.studenity.model.User;
 import projet.studenity.repository.ClassRepository;
 import projet.studenity.repository.ClassUserRepository;
+import projet.studenity.repository.UserRepository;
 import projet.studenity.service.ClassService;
+import projet.studenity.service.UserService;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,6 +22,9 @@ public class ClassServiceImpl implements ClassService {
 
     @Autowired
     ClassUserRepository classUserRepo;
+
+    @Autowired
+    UserService userService;
 
     @Override
     public Class findClassById(int idClass) {
@@ -118,5 +124,17 @@ public class ClassServiceImpl implements ClassService {
             }
         }
         return count;
+    }
+
+    @Override
+    public List<String> listNameUserByClass(int idClass) {
+        List<ClassUser> listClassUser = classUserRepo.findAll();
+        List<String> listNameUser = new ArrayList<>();
+        for(ClassUser classUser: listClassUser){
+            if(classUser.getClassId()==idClass){
+                listNameUser.add(userService.findUserById(classUser.getUserId()).getFirstName()+" "+userService.findUserById(classUser.getUserId()).getFirstName());
+            }
+        }
+        return listNameUser;
     }
 }

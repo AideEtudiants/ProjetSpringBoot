@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import projet.studenity.model.Class;
 import projet.studenity.model.ClassUser;
+import projet.studenity.model.User;
 import projet.studenity.service.ClassService;
 
 import java.time.LocalDate;
@@ -56,14 +57,21 @@ public class ClassController {
     }
 
     @PostMapping(value="/participant")
-    public int participant(@RequestBody int idClass){return classService.participant(idClass);}
+    public int participant(@RequestBody int idClass){
+        return classService.participant(idClass);}
+
+    @PostMapping(value="/userByClass")
+    public List<String> listUserByClass(@RequestBody int idClass){
+        return classService.listNameUserByClass(idClass);}
+
 
     @GetMapping(value="/test")
     public
-    List<Class> test() {
-        Class classes = new Class();
-        classes.setDescription("CC prepare");
-        classes.setName("Gestion de projet");
-        return classService.listClassByUser(4);
+    List<String> test() {
+//        Class classes = new Class();
+//        classes.setDescription("CC prepare");
+//        classes.setName("Gestion de projet");
+//        return classService.listClassByUser(4);
+        return classService.listNameUserByClass(5);
     }
 }
